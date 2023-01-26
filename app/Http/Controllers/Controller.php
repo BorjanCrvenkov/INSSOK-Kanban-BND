@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Responses\CustomResponse;
 use App\Models\BaseModel;
 use App\Models\User;
 use App\Services\BaseService;
@@ -17,7 +18,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 
-    public function __construct(public BaseModel|User $model, public BaseService $service,
+    public function __construct(public BaseModel|User $model, public BaseService $service, public CustomResponse $response,
                                 public string $resource, public string $collection)
     {
 
@@ -33,7 +34,7 @@ class Controller extends BaseController
 
         $models = new $this->collection($modelsData);
 
-        // Return Custom Response
+        return $this->response->success(data: $models);
     }
 
     /**
@@ -46,7 +47,7 @@ class Controller extends BaseController
 
         $modelData = new $this->resource($this->service->store($validatedData));
 
-        // Return Custom Response
+        return $this->response->success(data: $modelData);
     }
 
     /**
@@ -57,7 +58,7 @@ class Controller extends BaseController
     {
         $modelData = new $this->resource($model);
 
-        // Return Custom Response
+        return $this->response->success(data: $modelData);
     }
 
     /**
@@ -71,7 +72,7 @@ class Controller extends BaseController
 
         $modelData = new $this->resource($this->service->update($model->id, $validatedData));
 
-        // Return Custom Response
+        return $this->response->success(data: $modelData);
     }
 
     /**
@@ -82,6 +83,6 @@ class Controller extends BaseController
     {
         $this->service->destroy($model->id);
 
-        // Return Custom Response
+        return $this->response->noContent();
     }
 }
