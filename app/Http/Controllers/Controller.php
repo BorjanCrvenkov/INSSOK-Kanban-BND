@@ -17,18 +17,25 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-
+    /**
+     * @param BaseModel|User $model
+     * @param BaseService $service
+     * @param CustomResponse $response
+     * @param string $resource
+     * @param string $collection
+     * @param string $authParam
+     */
     public function __construct(public BaseModel|User $model, public BaseService $service, public CustomResponse $response,
-                                public string $resource, public string $collection)
+                                public string         $resource, public string $collection,
+                                public string         $authParam)
     {
-
+        $this->authorizeResource($this->model::class, $this->authParam);
     }
 
     /**
-     * @param FormRequest $request
      * @return JsonResponse
      */
-    public function indexHelper(FormRequest $request): JsonResponse
+    public function indexHelper(): JsonResponse
     {
         $modelsData = $this->service->index();
 
