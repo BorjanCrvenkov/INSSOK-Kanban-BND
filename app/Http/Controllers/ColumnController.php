@@ -13,6 +13,11 @@ use Illuminate\Http\JsonResponse;
 
 class ColumnController extends Controller
 {
+    /**
+     * @param Column $model
+     * @param ColumnService $service
+     * @param CustomResponse $response
+     */
     public function __construct(Column $model, ColumnService $service, CustomResponse $response)
     {
         $authParam = 'column';
