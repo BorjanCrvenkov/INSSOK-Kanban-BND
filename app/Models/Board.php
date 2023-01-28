@@ -12,7 +12,7 @@ class Board extends BaseModel
     protected $fillable = [
         'name',
         'description',
-        'workspace_id'
+        'workspace_id',
     ];
 
     /**

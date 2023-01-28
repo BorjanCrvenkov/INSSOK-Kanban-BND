@@ -13,6 +13,11 @@ use Illuminate\Http\JsonResponse;
 
 class BoardController extends Controller
 {
+    /**
+     * @param Board $model
+     * @param BoardService $service
+     * @param CustomResponse $response
+     */
     public function __construct(Board $model, BoardService $service, CustomResponse $response)
     {
         $authParam = 'board';

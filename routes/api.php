@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\WorkspaceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('workspaces', WorkspaceController::class);
+
+Route::apiResource('boards', BoardController::class);
