@@ -13,5 +13,4 @@ class BoardService extends BaseService
     {
         parent::__construct($model);
     }
-
 }
