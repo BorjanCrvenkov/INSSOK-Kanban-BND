@@ -29,6 +29,14 @@ class CustomResponse extends Response
     }
 
     /**
+     * @return JsonResponse
+     */
+    public function invalidLoginCredentials(): JsonResponse
+    {
+        return $this->getResponseStructure(self::HTTP_BAD_REQUEST, 'Invalid login credentials.');
+    }
+
+    /**
      * @param int $code
      * @param string $message
      * @param array|ResourceCollection|JsonResource|null $data
