@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Workspace;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory
  */
-class WorkspaceFactory extends Factory
+class BoardFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +18,9 @@ class WorkspaceFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'        => $this->faker->word(),
-            'description' => $this->faker->paragraphs(2, true),
+            'name'         => $this->faker->word(),
+            'description'  => $this->faker->paragraphs(2, true),
+            'workspace_id' => Workspace::factory(),
         ];
     }
 }
