@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('order');
             $table->integer('board_id');
-            //$table->foreign('board_id')->references('id')->on('boards');
+            $table->foreign('board_id')->references('id')->on('boards');
             $table->timestamps();
         });
     }

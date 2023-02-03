@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function __construct(User $model, UserService $service, CustomResponse $response)
     {
-        $authParam = 'task';
+        $authParam = 'user';
         parent::__construct($model, $service, $response, UserResource::class, UserCollection::class, $authParam);
     }
 

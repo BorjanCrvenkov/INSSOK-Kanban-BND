@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('task_id');
-            //$table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            //$table->foreign('task_id')->references('id')->on('tasks')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('task_id')->references('id')->on('tasks')->cascadeOnDelete();
             $table->timestamps();
         });
     }
