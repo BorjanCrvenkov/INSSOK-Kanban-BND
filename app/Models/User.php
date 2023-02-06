@@ -50,7 +50,7 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function assignedTasks(): HasMany
+    public function assigned_tasks(): HasMany
     {
         return $this->hasMany(Task::class, 'assignee_id', 'id');
     }
@@ -58,7 +58,7 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function reportedTasks(): HasMany
+    public function reported_tasks(): HasMany
     {
         return $this->hasMany(Task::class, 'reporter_id', 'id');
     }
@@ -66,8 +66,16 @@ class User extends Authenticatable
     /**
      * @return BelongsToMany
      */
-    public function watchedTasks(): BelongsToMany
+    public function watched_tasks(): BelongsToMany
     {
         return $this->belongsToMany(Task::class, 'watches');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function workspaces(): BelongsToMany
+    {
+        return $this->belongsToMany(Workspace::class, 'user_workspaces');
     }
 }
