@@ -8,6 +8,7 @@ use App\Models\Column;
 use App\Models\Role;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\UserTaskComment;
 use App\Models\Watches;
 use App\Models\Workspace;
 use App\Policies\BoardPolicy;
@@ -27,13 +28,14 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        Workspace::class => WorkspacePolicy::class,
-        Board::class     => BoardPolicy::class,
-        Column::class    => ColumnPolicy::class,
-        Task::class      => TaskPolicy::class,
-        Watches::class   => WatchesPolicy::class,
-        User::class      => UserPolicy::class,
-        Role::class      => RolePolicy::class,
+        Workspace::class        => WorkspacePolicy::class,
+        Board::class            => BoardPolicy::class,
+        Column::class           => ColumnPolicy::class,
+        Task::class             => TaskPolicy::class,
+        Watches::class          => WatchesPolicy::class,
+        User::class             => UserPolicy::class,
+        Role::class             => RolePolicy::class,
+        UserTaskComment::class  => UserTaskComment::class,
     ];
 
     /**
