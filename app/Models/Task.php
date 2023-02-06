@@ -49,7 +49,7 @@ class Task extends BaseModel
     /**
      * @return BelongsToMany
      */
-    public function usersWatchedBy(): BelongsToMany
+    public function users_watched_by(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'watches');
     }

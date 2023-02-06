@@ -3,6 +3,7 @@
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserWorkspaceController;
 use App\Http\Controllers\WatchesController;
 use App\Http\Controllers\WorkspaceController;
 use Illuminate\Http\Request;
@@ -29,3 +30,5 @@ Route::apiResource('tasks', TaskController::class);
 
 Route::apiResource('watches', WatchesController::class)
     ->except('update');
+
+Route::apiResource('user_workspaces', UserWorkspaceController::class);
