@@ -21,12 +21,12 @@ return new class extends Migration {
             $table->string('priority')->default(TaskPriorityEnum::MEDIUM->value);
             $table->date('due_date')->nullable();
             $table->string('type')->default(TaskTypeEnum::TASK->value);
-            $table->integer('column_id')->nullable();
-            $table->integer('reporter_id');
-            $table->integer('assignee_id');
-            //$table->foreign('column_id')->references('id')->on('columns')->cascadeOnDelete();
-            //$table->foreign('reporter_id')->references('id')->on('users')->cascadeOnDelete();
-            //$table->foreign('assignee_id')->references('id')->on('users')->cascadeOnDelete();
+            //$table->integer('column_id')->nullable();
+            //$table->integer('reporter_id');
+            //$table->integer('assignee_id');
+            $table->foreignId('column_id')->references('id')->on('columns')->cascadeOnDelete();
+            $table->foreignId('reporter_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('assignee_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

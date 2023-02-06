@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Task;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class TaskPolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 
@@ -35,10 +35,9 @@ class TaskPolicy
      * Determine whether the user can view the model.
      *
      * @param User $user
-     * @param Task $task
      * @return Response|bool
      */
-    public function view(User $user, Task $task)
+    public function view(User $user, Role $role)
     {
         return true;
     }
@@ -58,10 +57,9 @@ class TaskPolicy
      * Determine whether the user can update the model.
      *
      * @param User $user
-     * @param Task $task
      * @return Response|bool
      */
-    public function update(User $user, Task $task)
+    public function update(User $user, Role $role)
     {
         return true;
     }
@@ -70,10 +68,9 @@ class TaskPolicy
      * Determine whether the user can delete the model.
      *
      * @param User $user
-     * @param Task $task
      * @return Response|bool
      */
-    public function delete(User $user, Task $task)
+    public function delete(User $user, Role $role)
     {
         return true;
     }

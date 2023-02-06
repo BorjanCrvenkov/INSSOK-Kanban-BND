@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Task;
 use App\Models\User;
+use App\Models\UserTaskComment;
+use http\Client\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
-class TaskPolicy
+class UserTaskCommentPolicy
 {
     use HandlesAuthorization;
 
@@ -35,10 +35,10 @@ class TaskPolicy
      * Determine whether the user can view the model.
      *
      * @param User $user
-     * @param Task $task
+     * @param UserTaskComment $userTaskComment
      * @return Response|bool
      */
-    public function view(User $user, Task $task)
+    public function view(User $user, UserTaskComment $userTaskComment)
     {
         return true;
     }
@@ -58,10 +58,10 @@ class TaskPolicy
      * Determine whether the user can update the model.
      *
      * @param User $user
-     * @param Task $task
+     * @param UserTaskComment $userTaskComment
      * @return Response|bool
      */
-    public function update(User $user, Task $task)
+    public function update(User $user, UserTaskComment $userTaskComment)
     {
         return true;
     }
@@ -70,10 +70,10 @@ class TaskPolicy
      * Determine whether the user can delete the model.
      *
      * @param User $user
-     * @param Task $task
+     * @param UserTaskComment $userTaskComment
      * @return Response|bool
      */
-    public function delete(User $user, Task $task)
+    public function delete(User $user, UserTaskComment $userTaskComment)
     {
         return true;
     }
