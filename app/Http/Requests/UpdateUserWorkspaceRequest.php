@@ -2,16 +2,17 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UserWorkspaceAccessTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRoleRequest extends FormRequest
+class UpdateUserWorkspaceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,10 +22,10 @@ class UpdateRoleRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name'  => 'string',
+            'access_type'  => 'required|string|in:' . UserWorkspaceAccessTypeEnum::getAllValuesAsString(),
         ];
     }
 }
