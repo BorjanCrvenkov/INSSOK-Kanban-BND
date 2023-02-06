@@ -7,12 +7,14 @@ use App\Models\Board;
 use App\Models\Column;
 use App\Models\Task;
 use App\Models\UserWorkspace;
+use App\Models\User;
 use App\Models\Watches;
 use App\Models\Workspace;
 use App\Policies\BoardPolicy;
 use App\Policies\ColumnPolicy;
 use App\Policies\TaskPolicy;
 use App\Policies\UserWorkspacePolicy;
+use App\Policies\UserPolicy;
 use App\Policies\WatchesPolicy;
 use App\Policies\WorkspacePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -30,6 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         Column::class        => ColumnPolicy::class,
         Task::class          => TaskPolicy::class,
         Watches::class       => WatchesPolicy::class,
+        User::class   => UserPolicy::class,
         UserWorkspace::class => UserWorkspacePolicy::class,
     ];
 
