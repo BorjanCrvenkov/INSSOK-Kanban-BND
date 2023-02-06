@@ -34,6 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         Task::class             => TaskPolicy::class,
         Watches::class          => WatchesPolicy::class,
         User::class             => UserPolicy::class,
+        UserWorkspace::class    => UserWorkspacePolicy::class,
         Role::class             => RolePolicy::class,
         UserTaskComment::class  => UserTaskComment::class,
     ];

@@ -36,6 +36,8 @@ Route::apiResource('watches', WatchesController::class)
 
 Route::apiResource('users', UserController::Class);
 
+Route::apiResource('user_workspaces', UserWorkspaceController::class);
+
 Route::apiResource('roles', RoleCollection::Class);
 
 Route::apiResource('comments', CommentCollection::Class);
