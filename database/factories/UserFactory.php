@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\RoleEnum;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -26,6 +28,7 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'image' => fake()->imageUrl(),
             'remember_token' => Str::random(10),
+            'role_id' => Role::where('name', '=', RoleEnum::USER->value)->first()->getKey(),
         ];
     }
 
@@ -39,5 +42,18 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    /**
+     *
+     * @return static
+     */
+    public function admin(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'role_id' => Role::where('name', '=', RoleEnum::ADMINISTRATOR->value)->first()->getKey(),
+            ];
+        });
     }
 }
