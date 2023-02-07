@@ -28,7 +28,7 @@ class TaskPolicy
      */
     public function viewAny(User $user)
     {
-                return true;
+        return true;
     }
 
     /**
@@ -40,7 +40,7 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-                return true;
+        return true;
     }
 
     /**
@@ -51,7 +51,7 @@ class TaskPolicy
      */
     public function create(User $user)
     {
-                return true;
+        return true;
     }
 
     /**
@@ -63,7 +63,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-                return true;
+        return true;
     }
 
     /**
@@ -75,6 +75,6 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-                return true;
+        return true;
     }
 }

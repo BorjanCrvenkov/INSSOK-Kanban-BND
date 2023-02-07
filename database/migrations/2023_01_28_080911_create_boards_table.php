@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->integer('workspace_id');
-            $table->foreign('workspace_id')->references('id')->on('workspaces')->cascadeOnDelete();
+            //$table->integer('workspace_id');
+            $table->foreignId('workspace_id')->references('id')->on('workspaces')->cascadeOnDelete();
             $table->timestamps();
         });
     }
