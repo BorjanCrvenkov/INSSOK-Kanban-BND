@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\TaskController;
@@ -23,6 +24,16 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::prefix('auth')->controller(AuthenticationController::class)->group(function () {
+    Route::post('/login', 'login')->name('login');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/logout', 'logout')->name('logout');
+        Route::get('/user', 'getAuthenticatedUser')->name('getAuthenticatedUser');
+        Route::get('/refreshToken', 'refreshToken')->name('refreshToken');
+    });
+});
 
 Route::apiResource('workspaces', WorkspaceController::class);
 
