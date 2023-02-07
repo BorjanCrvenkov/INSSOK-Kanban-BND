@@ -2,19 +2,16 @@
 
 namespace App\Enums;
 
+use App\Traits\EnumTrait;
+
 enum TaskPriorityEnum: string
 {
+    use EnumTrait;
+
     case LOWEST = 'lowest';
     case LOW = 'low';
     case MEDIUM = 'medium';
     case HIGH = 'high';
     case HIGHEST = 'highest';
 
-    /**
-     * @return string
-     */
-    public static function getAllValuesAsString(): string
-    {
-        return implode(', ', array_column(self::cases(), 'value'));
-    }
 }

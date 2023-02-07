@@ -2,17 +2,13 @@
 
 namespace App\Enums;
 
+use App\Traits\EnumTrait;
+
 enum TaskTypeEnum: string
 {
+    use EnumTrait;
+
     case STORY = 'story';
     case TASK = 'task';
     case BUG = 'bug';
-
-    /**
-     * @return string
-     */
-    public static function getAllValuesAsString(): string
-    {
-        return implode(', ', array_column(self::cases(), 'value'));
-    }
 }

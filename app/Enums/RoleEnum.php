@@ -4,11 +4,10 @@ namespace App\Enums;
 
 use App\Traits\EnumTrait;
 
-enum UserWorkspaceAccessTypeEnum: string
+enum RoleEnum: string
 {
     use EnumTrait;
 
-    case ADMIN = 'admin';
-    case MANAGER = 'manager';
+    case ADMINISTRATOR = 'administrator';
     case USER = 'user';
 }
