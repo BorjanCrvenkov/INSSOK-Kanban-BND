@@ -30,6 +30,7 @@ class UpdateUserRequest extends FormRequest
             'email'      => 'email|unique:users',
             'password'   => 'min:8',
             'image'      => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'role_id'    => 'integer|exists:roles,id',
         ];
     }
 }
