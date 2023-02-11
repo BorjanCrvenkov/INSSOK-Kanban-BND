@@ -23,4 +23,35 @@ class Role extends BaseModel
     {
         return $this->hasMany(User::class);
     }
+
+    /**
+     * @return string[]
+     */
+    public function allowedFilters(): array
+    {
+        return [
+            'name'
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function allowedSorts(): array
+    {
+        return [
+            'name',
+            '-name'
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function defaultSorts(): array
+    {
+        return [
+            'name',
+        ];
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\QueryBuilderTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, QueryBuilderTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -46,6 +47,45 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return string[]
+     */
+    public function allowedFilters(): array
+    {
+        return [
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+        ];
+    }
+
+    /**
+     * @return array|string[]
+     */
+    public function allowedSorts(): array
+    {
+        return [
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function allowedIncludes(): array
+    {
+        return [
+            'assigned_tasks',
+            'reported_tasks',
+            'watched_tasks',
+            'workspaces',
+        ];
+    }
 
     /**
      * @return HasMany

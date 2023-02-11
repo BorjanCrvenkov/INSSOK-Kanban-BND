@@ -39,9 +39,7 @@ class Controller extends BaseController
     {
         $modelsData = $this->service->index();
 
-        $models = new $this->collection($modelsData);
-
-        return $this->response->success(data: $models);
+        return $this->response->success(data: $modelsData->toArray());
     }
 
     /**
@@ -63,9 +61,9 @@ class Controller extends BaseController
      */
     public function showHelper(BaseModel|User $model): JsonResponse
     {
-        $modelData = new $this->resource($model);
+        $modelData = $this->service->show($model->getKey());
 
-        return $this->response->success(data: $modelData);
+        return $this->response->success(data: $modelData->toArray());
     }
 
     /**

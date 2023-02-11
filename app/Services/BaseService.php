@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Models\BaseModel;
 use App\Models\User;
+use App\Models\Workspace;
 use Illuminate\Database\Eloquent\Collection;
+use Spatie\QueryBuilder\QueryBuilder;
 
 abstract class BaseService
 {
@@ -19,11 +21,18 @@ abstract class BaseService
     }
 
     /**
-     * @return Collection
+     * @return Collection|array
      */
-    public function index(): Collection
+    public function index(): Collection|array
     {
-        return $this->model::all();
+        $model = new $this->model();
+
+        return QueryBuilder::for($model::class)
+            ->allowedIncludes($model->allowedIncludes())
+            ->allowedFilters($model->allowedFilters())
+            ->defaultSorts($model->defaultSorts())
+            ->allowedSorts($model->allowedSorts())
+            ->get();
     }
 
     /**
@@ -32,7 +41,13 @@ abstract class BaseService
      */
     public function show(int $id): BaseModel|User
     {
-        return $this->model->find($id);
+        $model = new $this->model();
+
+        return QueryBuilder::for($model::class)
+            ->allowedIncludes($model->allowedIncludes())
+            ->defaultSorts($model->defaultSorts())
+            ->allowedSorts($model->allowedSorts())
+            ->findOrFail($id);
     }
 
     /**
