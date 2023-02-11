@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class Column extends BaseModel
 {
@@ -15,6 +16,38 @@ class Column extends BaseModel
         'order',
         'border_id',
     ];
+
+    /**
+     * @return array
+     */
+    public function allowedFilters(): array
+    {
+        return [
+            'name',
+            AllowedFilter::exact('border_id'),
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function defaultSorts(): array
+    {
+        return [
+            'order',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function allowedIncludes(): array
+    {
+        return [
+            'board',
+            'tasks',
+        ];
+    }
 
     /**
      * @return BelongsTo

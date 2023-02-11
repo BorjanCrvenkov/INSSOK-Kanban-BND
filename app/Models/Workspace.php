@@ -16,6 +16,48 @@ class Workspace extends BaseModel
     ];
 
     /**
+     * @return string[]
+     */
+    public function allowedFilters(): array
+    {
+        return [
+            'name',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function allowedSorts(): array
+    {
+        return [
+            'name',
+            '-name',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function defaultSorts(): array
+    {
+        return [
+            'name',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function allowedIncludes(): array
+    {
+        return [
+//            'boards',
+            'users',
+        ];
+    }
+
+    /**
      * @return HasMany
      */
     public function boards(): HasMany

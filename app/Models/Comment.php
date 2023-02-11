@@ -16,11 +16,22 @@ class Comment extends BaseModel
         'body',
     ];
 
+    /**
+     * @return string[]
+     */
+    public function allowedIncludes(): array
+    {
+        return [
+            'usersCommented',
+            'commentOnTask',
+        ];
+    }
+
 
     /**
      * @return BelongsToMany
      */
-    public function userCommented(): BelongsToMany //dali e ok imeto na funkcijava?
+    public function usersCommented(): BelongsToMany //dali e ok imeto na funkcijava?
     {
         return $this->belongsToMany(User::class, 'user-task-comment'); // da se implement user-task-comment
     }
