@@ -52,7 +52,7 @@ class Workspace extends BaseModel
     public function allowedIncludes(): array
     {
         return [
-//            'boards',
+            'boards',
             'users',
         ];
     }
