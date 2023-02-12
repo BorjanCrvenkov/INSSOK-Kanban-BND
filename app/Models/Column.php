@@ -14,7 +14,7 @@ class Column extends BaseModel
     protected $fillable = [
         'name',
         'order',
-        'border_id',
+        'board_id',
     ];
 
     /**
