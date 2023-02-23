@@ -20,13 +20,14 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'username' => fake()->userName(),
-            'email' => fake()->unique()->safeEmail(),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'username' => $this->faker->userName(),
+            'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'image' => fake()->imageUrl(),
+            'image_name' => $this->faker->word(),
+            'image_link' => $this->faker->imageUrl(),
             'remember_token' => Str::random(10),
             'role_id' => Role::where('name', '=', RoleEnum::USER->value)->first()->getKey(),
         ];

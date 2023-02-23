@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Http\Responses\CustomResponse;
@@ -56,16 +57,12 @@ class UserController extends Controller
         return $this->showHelper($user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdateUserRequest $request
-     * @param User $user
-     * @return JsonResponse
-     */
-    public function update(UpdateUserRequest $request, User $user)
-    {
-        return $this->updateHelper($user, $request);
+    public function updatePost(UpdateUserRequest $request, int $id){
+        $validatedData = $request->validated();
+
+        $modelData = $this->service->update($id, $validatedData);
+
+        return $this->response->success(data: $modelData->toArray());
     }
 
     /**

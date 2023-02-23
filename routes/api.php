@@ -46,7 +46,10 @@ Route::apiResource('tasks', TaskController::class);
 Route::apiResource('watches', WatchesController::class)
     ->except('update');
 
-Route::apiResource('users', UserController::Class);
+Route::apiResource('users', UserController::Class)
+->except(['update']);
+Route::post('users/{id}', [UserController::class, 'updatePost'])
+->name('update-post');
 
 Route::apiResource('user_workspaces', UserWorkspaceController::class);
 
