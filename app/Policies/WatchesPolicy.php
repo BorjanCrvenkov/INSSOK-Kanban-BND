@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Watches;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class WatchesPolicy
 {
@@ -13,20 +12,24 @@ class WatchesPolicy
 
     /**
      * @param User|null $user
-     * @return bool
+     * @return ?bool
      */
-    public function before(?User $user): bool
+    public function before(?User $user): ?bool
     {
-        return true;
+        if (isset($user) && $user->is_admin) {
+            return true;
+        }
+
+        return null;
     }
 
     /**
      * Determine whether the user can view any models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -36,9 +39,9 @@ class WatchesPolicy
      *
      * @param User $user
      * @param Watches $watches
-     * @return Response|bool
+     * @return bool
      */
-    public function view(User $user, Watches $watches)
+    public function view(User $user, Watches $watches): bool
     {
         return true;
     }
@@ -47,9 +50,9 @@ class WatchesPolicy
      * Determine whether the user can create models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return true;
     }
@@ -59,11 +62,11 @@ class WatchesPolicy
      *
      * @param User $user
      * @param Watches $watches
-     * @return Response|bool
+     * @return bool|false
      */
-    public function update(User $user, Watches $watches)
+    public function update(User $user, Watches $watches): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -71,10 +74,10 @@ class WatchesPolicy
      *
      * @param User $user
      * @param Watches $watches
-     * @return Response|bool
+     * @return bool
      */
-    public function delete(User $user, Watches $watches)
+    public function delete(User $user, Watches $watches): bool
     {
-        return true;
+        return $watches->user_id = $user->getKey();
     }
 }

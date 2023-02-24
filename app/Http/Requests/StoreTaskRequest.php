@@ -31,6 +31,7 @@ class StoreTaskRequest extends FormRequest
             'priority'    => 'required|string|in:' . TaskPriorityEnum::getAllValuesAsString(),
             'due_date'    => 'date',
             'type'        => 'required|string|in:' . TaskTypeEnum::getAllValuesAsString(),
+            'column_id'   => 'required|integer|exists:columns,id',
             'assignee_id' => 'required|integer|exists:users,id',
         ];
     }
