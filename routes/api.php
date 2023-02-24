@@ -35,26 +35,30 @@ Route::prefix('auth')->controller(AuthenticationController::class)->group(functi
     });
 });
 
-Route::apiResource('workspaces', WorkspaceController::class);
+Route::middleware('auth:sanctum')->group(function (){
+    Route::apiResource('workspaces', WorkspaceController::class);
 
-Route::apiResource('boards', BoardController::class);
+    Route::apiResource('boards', BoardController::class);
 
-Route::apiResource('columns', ColumnController::class);
+    Route::apiResource('columns', ColumnController::class);
 
-Route::apiResource('tasks', TaskController::class);
+    Route::apiResource('tasks', TaskController::class);
 
-Route::apiResource('watches', WatchesController::class)
-    ->except('update');
+    Route::apiResource('watches', WatchesController::class)
+        ->except('update');
 
-Route::apiResource('users', UserController::Class)
-->except(['update']);
-Route::post('users/{id}', [UserController::class, 'updatePost'])
-->name('update-post');
+    Route::apiResource('users', UserController::Class)
+        ->except(['update']);
+    Route::post('users/{id}', [UserController::class, 'updatePost'])
+        ->name('update-post');
 
-Route::apiResource('user_workspaces', UserWorkspaceController::class);
+    Route::apiResource('user_workspaces', UserWorkspaceController::class);
 
-Route::apiResource('roles', RoleCollection::Class);
+    Route::apiResource('roles', RoleCollection::Class);
 
-Route::apiResource('comments', CommentCollection::Class);
+    Route::apiResource('comments', CommentCollection::Class);
 
-Route::apiResource('user-task-comment', UserTaskCommentCollection::Class);
+    Route::apiResource('user-task-comment', UserTaskCommentCollection::Class);
+});
+
+

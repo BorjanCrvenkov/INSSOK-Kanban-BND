@@ -2,10 +2,12 @@
 
 namespace App\Policies;
 
+use App\Enums\UserWorkspaceAccessTypeEnum;
 use App\Models\User;
 use App\Models\Board;
+use App\Models\UserWorkspace;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Request;
 
 class BoardPolicy
 {
@@ -13,20 +15,24 @@ class BoardPolicy
 
     /**
      * @param User|null $user
-     * @return bool
+     * @return ?bool
      */
-    public function before(?User $user): bool
+    public function before(?User $user): ?bool
     {
-        return true;
+        if (isset($user) && $user->is_admin) {
+            return true;
+        }
+
+        return null;
     }
 
     /**
      * Determine whether the user can view any models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -36,22 +42,31 @@ class BoardPolicy
      *
      * @param User $user
      * @param Board $board
-     * @return Response|bool
+     * @return bool
      */
-    public function view(User $user, Board $board)
+    public function view(User $user, Board $board): bool
     {
-        return true;
+        return $board->workspace->users->contains($user);
     }
 
     /**
      * Determine whether the user can create models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        return true;
+        if (Request::has('workspace_id')) {
+            $workspace_id = (int)Request::get('workspace_id');
+
+            $user_workspace = UserWorkspace::query()->where('user_id', '=', $user->getKey())
+            ->where('workspace_id', '=', $workspace_id)
+            ->first();
+
+            return $user_workspace && $user_workspace->access_type !== UserWorkspaceAccessTypeEnum::USER;
+        }
+        return false;
     }
 
     /**
@@ -59,11 +74,16 @@ class BoardPolicy
      *
      * @param User $user
      * @param Board $board
-     * @return Response|bool
+     * @return bool
      */
-    public function update(User $user, Board $board)
+    public function update(User $user, Board $board): bool
     {
-        return true;
+        $workspace_id = $board->workspace->getKey();
+        $user_workspace = UserWorkspace::query()->where('user_id', '=', $user->getKey())
+            ->where('workspace_id', '=', $workspace_id)
+            ->first();
+
+        return $user_workspace && $user_workspace->access_type !== UserWorkspaceAccessTypeEnum::USER;
     }
 
     /**
@@ -71,10 +91,15 @@ class BoardPolicy
      *
      * @param User $user
      * @param Board $board
-     * @return Response|bool
+     * @return bool
      */
-    public function delete(User $user, Board $board)
+    public function delete(User $user, Board $board): bool
     {
-        return true;
+        $workspace_id = $board->workspace->getKey();
+        $user_workspace = UserWorkspace::query()->where('user_id', '=', $user->getKey())
+            ->where('workspace_id', '=', $workspace_id)
+            ->first();
+
+        return $user_workspace && $user_workspace->access_type !== UserWorkspaceAccessTypeEnum::USER;
     }
 }

@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
+use App\Enums\UserWorkspaceAccessTypeEnum;
 use App\Models\User;
+use App\Models\UserWorkspace;
 use App\Models\Workspace;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
 class WorkspacePolicy
 {
@@ -13,20 +14,24 @@ class WorkspacePolicy
 
     /**
      * @param User|null $user
-     * @return bool
+     * @return ?bool
      */
-    public function before(?User $user): bool
+    public function before(?User $user): ?bool
     {
-        return true;
+        if (isset($user) && $user->is_admin) {
+            return true;
+        }
+
+        return null;
     }
 
     /**
      * Determine whether the user can view any models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -36,20 +41,20 @@ class WorkspacePolicy
      *
      * @param User $user
      * @param Workspace $workspace
-     * @return Response|bool
+     * @return bool
      */
-    public function view(User $user, Workspace $workspace)
+    public function view(User $user, Workspace $workspace): bool
     {
-        return true;
+        return $workspace->users->contains($user);
     }
 
     /**
      * Determine whether the user can create models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return true;
     }
@@ -59,11 +64,14 @@ class WorkspacePolicy
      *
      * @param User $user
      * @param Workspace $workspace
-     * @return Response|bool
+     * @return bool
      */
-    public function update(User $user, Workspace $workspace)
+    public function update(User $user, Workspace $workspace): bool
     {
-        return true;
+        $user_workspace = UserWorkspace::query()->where('user_id', '=', $user->getKey())
+            ->where('workspace_id', '=', $workspace->getKey())->first();
+
+        return $user_workspace->access_type !== UserWorkspaceAccessTypeEnum::USER->value;
     }
 
     /**
@@ -71,10 +79,13 @@ class WorkspacePolicy
      *
      * @param User $user
      * @param Workspace $workspace
-     * @return Response|bool
+     * @return bool
      */
-    public function delete(User $user, Workspace $workspace)
+    public function delete(User $user, Workspace $workspace): bool
     {
-        return true;
+        $user_workspace = UserWorkspace::query()->where('user_id', '=', $user->getKey())
+            ->where('workspace_id', '=', $workspace->getKey())->first();
+
+        return $user_workspace->access_type === UserWorkspaceAccessTypeEnum::ADMIN->value;
     }
 }

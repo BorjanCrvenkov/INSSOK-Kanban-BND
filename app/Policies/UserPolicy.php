@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Request;
 
 class UserPolicy
 {
@@ -12,20 +12,24 @@ class UserPolicy
 
     /**
      * @param User|null $user
-     * @return bool
+     * @return ?bool
      */
-    public function before(?User $user): bool
+    public function before(?User $user): ?bool
     {
-        return true;
+        if (isset($user) && $user->is_admin) {
+            return true;
+        }
+
+        return null;
     }
 
     /**
      * Determine whether the user can view any models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -34,9 +38,9 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function view(User $user)
+    public function view(User $user): bool
     {
         return true;
     }
@@ -45,11 +49,11 @@ class UserPolicy
      * Determine whether the user can create models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool|false
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -58,19 +62,19 @@ class UserPolicy
      * @param User|null $user
      * @return bool
      */
-    public function updatePost(?User $user)
+    public function updatePost(?User $user): bool
     {
-        return true;
+        return Request::has('user_id') && $user->getKey() === (int) Request::get('user_id');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool|false
      */
-    public function delete(User $user)
+    public function delete(User $user): bool
     {
-        return true;
+        return false;
     }
 }

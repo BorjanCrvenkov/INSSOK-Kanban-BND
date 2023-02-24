@@ -32,7 +32,7 @@ class UserService extends BaseService
     public function store(array $data): User
     {
         if (!Arr::has($data, 'role_id')) {
-            $data['role_id'] = Role::where('name', '=', RoleEnum::USER->value)->first()->getKey();
+            $data['role_id'] = Role::query()->where('name', '=', RoleEnum::USER->value)->first()->getKey();
         }
 
         $data = $this->resolveImageNameAndLinkAndSaveImage($data);
@@ -48,7 +48,7 @@ class UserService extends BaseService
      */
     public function update(int $id, array $data): BaseModel|User
     {
-        $user = User::find($id);
+        $user = User::query()->find($id);
 
         $data = $this->resolveImageNameAndLinkAndSaveImage($data, $user);
 
@@ -59,7 +59,7 @@ class UserService extends BaseService
 
     public function destroy(int $id): bool|null
     {
-        $user = User::find($id);
+        $user = User::query()->find($id);
 
         $this->deleteImage($user->image_name);
 

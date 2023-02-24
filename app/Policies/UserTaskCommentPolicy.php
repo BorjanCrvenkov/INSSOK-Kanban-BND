@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Task;
 use App\Models\User;
 use App\Models\UserTaskComment;
-use http\Client\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Request;
 
 class UserTaskCommentPolicy
 {
@@ -13,20 +14,24 @@ class UserTaskCommentPolicy
 
     /**
      * @param User|null $user
-     * @return bool
+     * @return ?bool
      */
-    public function before(?User $user): bool
+    public function before(?User $user): ?bool
     {
-        return true;
+        if (isset($user) && $user->is_admin) {
+            return true;
+        }
+
+        return null;
     }
 
     /**
      * Determine whether the user can view any models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -36,22 +41,27 @@ class UserTaskCommentPolicy
      *
      * @param User $user
      * @param UserTaskComment $userTaskComment
-     * @return Response|bool
+     * @return bool
      */
-    public function view(User $user, UserTaskComment $userTaskComment)
+    public function view(User $user, UserTaskComment $userTaskComment): bool
     {
-        return true;
+        return $userTaskComment->task->column->board->workspace->users->contains($user);
     }
 
     /**
      * Determine whether the user can create models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        return true;
+        if(Request::has('task_id')){
+            $task = Task::query()->find((int)Request::get('task_id'));
+
+            return $task->column->board->workspace->users->contains($user);
+        }
+        return false;
     }
 
     /**
@@ -59,11 +69,11 @@ class UserTaskCommentPolicy
      *
      * @param User $user
      * @param UserTaskComment $userTaskComment
-     * @return Response|bool
+     * @return bool
      */
-    public function update(User $user, UserTaskComment $userTaskComment)
+    public function update(User $user, UserTaskComment $userTaskComment): bool
     {
-        return true;
+        return $userTaskComment->user->getKey() === $user->getKey();
     }
 
     /**
@@ -71,10 +81,10 @@ class UserTaskCommentPolicy
      *
      * @param User $user
      * @param UserTaskComment $userTaskComment
-     * @return Response|bool
+     * @return bool|false
      */
-    public function delete(User $user, UserTaskComment $userTaskComment)
+    public function delete(User $user, UserTaskComment $userTaskComment): bool
     {
-        return true;
+        return false;
     }
 }

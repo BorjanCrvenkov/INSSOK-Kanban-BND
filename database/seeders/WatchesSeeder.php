@@ -17,7 +17,7 @@ class WatchesSeeder extends Seeder
      */
     public function run(int $user_id, int $task_id): void
     {
-        $exists = Watches::where('user_id', '=', $user_id)
+        $exists = Watches::query()->where('user_id', '=', $user_id)
             ->where('task_id', '=', $task_id)
             ->exists();
 

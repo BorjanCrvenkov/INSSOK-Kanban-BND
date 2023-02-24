@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'image_name' => $this->faker->word(),
             'image_link' => $this->faker->imageUrl(),
             'remember_token' => Str::random(10),
-            'role_id' => Role::where('name', '=', RoleEnum::USER->value)->first()->getKey(),
+            'role_id' => Role::query()->where('name', '=', RoleEnum::USER->value)->first()->getKey(),
         ];
     }
 
@@ -53,7 +53,7 @@ class UserFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'role_id' => Role::where('name', '=', RoleEnum::ADMINISTRATOR->value)->first()->getKey(),
+                'role_id' => Role::query()->where('name', '=', RoleEnum::ADMINISTRATOR->value)->first()->getKey(),
             ];
         });
     }

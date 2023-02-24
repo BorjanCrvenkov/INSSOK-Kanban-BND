@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Column;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Request;
 
 class TaskPolicy
 {
@@ -13,20 +14,24 @@ class TaskPolicy
 
     /**
      * @param User|null $user
-     * @return bool
+     * @return ?bool
      */
-    public function before(?User $user): bool
+    public function before(?User $user): ?bool
     {
-        return true;
+        if (isset($user) && $user->is_admin) {
+            return true;
+        }
+
+        return null;
     }
 
     /**
      * Determine whether the user can view any models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -36,22 +41,27 @@ class TaskPolicy
      *
      * @param User $user
      * @param Task $task
-     * @return Response|bool
+     * @return bool
      */
-    public function view(User $user, Task $task)
+    public function view(User $user, Task $task): bool
     {
-        return true;
+        return $task->column->board->workspace->users->contains($user);
     }
 
     /**
      * Determine whether the user can create models.
      *
      * @param User $user
-     * @return Response|bool
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        return true;
+        if (Request::has('column_id')) {
+            $column = Column::query()->find((int)Request::get('column_id'));
+            return $column->board->workspace->users->contains($user);
+        }
+
+        return false;
     }
 
     /**
@@ -59,11 +69,11 @@ class TaskPolicy
      *
      * @param User $user
      * @param Task $task
-     * @return Response|bool
+     * @return bool
      */
-    public function update(User $user, Task $task)
+    public function update(User $user, Task $task): bool
     {
-        return true;
+        return $task->column->board->workspace->users->contains($user);
     }
 
     /**
@@ -71,10 +81,10 @@ class TaskPolicy
      *
      * @param User $user
      * @param Task $task
-     * @return Response|bool
+     * @return bool|false
      */
-    public function delete(User $user, Task $task)
+    public function delete(User $user, Task $task): bool
     {
-        return true;
+        return false;
     }
 }

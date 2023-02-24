@@ -3,8 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RoleEnum;
 use App\Traits\QueryBuilderTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -29,6 +31,13 @@ class User extends Authenticatable
         'image_name',
         'image_link',
         'role_id',
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $with = [
+        'role'
     ];
 
     /**
@@ -90,6 +99,22 @@ class User extends Authenticatable
     }
 
     /**
+     * @return bool
+     */
+    public function getIsAdminAttribute(): bool
+    {
+        return $this->role->name === RoleEnum::ADMINISTRATOR->value;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsUserAttribute(): bool
+    {
+        return $this->role->name === RoleEnum::USER->value;
+    }
+
+    /**
      * @return HasMany
      */
     public function assigned_tasks(): HasMany
@@ -119,5 +144,13 @@ class User extends Authenticatable
     public function workspaces(): BelongsToMany
     {
         return $this->belongsToMany(Workspace::class, 'user_workspaces');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
     }
 }
