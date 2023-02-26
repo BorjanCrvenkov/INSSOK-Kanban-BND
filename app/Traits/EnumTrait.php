@@ -17,6 +17,6 @@ trait EnumTrait
      */
     public static function getAllValuesAsString(): string
     {
-        return implode(', ', array_column(self::cases(), 'value'));
+        return implode(',', array_column(self::cases(), 'value'));
     }
 }

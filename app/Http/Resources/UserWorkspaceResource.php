@@ -21,6 +21,7 @@ class UserWorkspaceResource extends JsonResource
             'id'           => $this->id,
             'user_id'      => $this->user_id,
             'workspace_id' => $this->workspace_id,
+            'access_type'  => $this->access_type,
             'created_at'   => $this->created_at,
             'updated_at'   => $this->updated_at,
         ];

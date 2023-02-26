@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Enums\UserWorkspaceAccessTypeEnum;
+use App\Rules\StoreUserWorkspaceIdsRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserWorkspaceRequest extends FormRequest
@@ -25,8 +26,17 @@ class StoreUserWorkspaceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'      => 'required|integer|exists:users,id',
-            'workspace_id' => 'required|integer|exists:workspaces,id',
+            'user_id'      => [
+                'required',
+                'integer',
+                'exists:users,id',
+                new StoreUserWorkspaceIdsRule(),
+            ],
+            'workspace_id' => [
+                'required',
+                'integer',
+                'exists:workspaces,id',
+            ],
             'access_type'  => 'required|string|in:' . UserWorkspaceAccessTypeEnum::getAllValuesAsString(),
         ];
     }
