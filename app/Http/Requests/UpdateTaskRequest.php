@@ -31,6 +31,8 @@ class UpdateTaskRequest extends FormRequest
             'priority'    => 'in:' . TaskPriorityEnum::getAllValuesAsString(),
             'due_date'    => 'date',
             'type'        => 'string|in:' . TaskTypeEnum::getAllValuesAsString(),
+            'order'       => 'integer',
+            'column_id'   => 'integer|exists:columns,id',
             'assignee_id' => 'integer|exists:users,id',
         ];
     }

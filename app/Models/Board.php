@@ -61,7 +61,8 @@ class Board extends BaseModel
     {
         return [
             'workspace',
-            'columns'
+            'columns',
+            'columns.tasks',
         ];
     }
 
@@ -78,6 +79,6 @@ class Board extends BaseModel
      */
     public function columns(): HasMany
     {
-        return $this->hasMany(Column::class);
+        return $this->hasMany(Column::class)->orderBy('order');
     }
 }

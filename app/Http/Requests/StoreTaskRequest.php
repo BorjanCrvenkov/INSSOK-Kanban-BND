@@ -29,10 +29,11 @@ class StoreTaskRequest extends FormRequest
             'title'       => 'required|string',
             'description' => 'string',
             'priority'    => 'required|string|in:' . TaskPriorityEnum::getAllValuesAsString(),
-            'due_date'    => 'date',
+            'due_date'    => 'nullable|date',
             'type'        => 'required|string|in:' . TaskTypeEnum::getAllValuesAsString(),
+            'order'       => 'nullable|integer',
             'column_id'   => 'required|integer|exists:columns,id',
-            'assignee_id' => 'required|integer|exists:users,id',
+            'assignee_id' => 'nullable|integer|exists:users,id',
         ];
     }
 }

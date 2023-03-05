@@ -19,6 +19,8 @@ class Task extends BaseModel
         'priority',
         'due_date',
         'type',
+        'order',
+        'column_id',
         'reporter_id',
         'assignee_id',
     ];
@@ -49,6 +51,17 @@ class Task extends BaseModel
             'assignee',
             'reporter',
             'users_watched_by',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function defaultSorts(): array
+    {
+        return [
+            'order',
+            'id',
         ];
     }
 

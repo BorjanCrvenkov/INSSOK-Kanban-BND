@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('workspace_id')->references('id')->on('workspaces')->cascadeOnDelete();
             $table->timestamps();
+            $table->index('user_id');
+            $table->index('workspace_id');
         });
     }
 

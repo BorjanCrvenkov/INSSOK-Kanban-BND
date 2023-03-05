@@ -20,6 +20,7 @@ return new class extends Migration
             //$table->integer('workspace_id');
             $table->foreignId('workspace_id')->references('id')->on('workspaces')->cascadeOnDelete();
             $table->timestamps();
+            $table->index('workspace_id');
         });
     }
 

@@ -26,6 +26,7 @@ class TaskFactory extends Factory
             'priority'    => $this->faker->randomElement(TaskPriorityEnum::getAllValuesAsArray()),
             'due_date'    => $this->faker->dateTimeThisYear,
             'type'        => $this->faker->randomElement(TaskTypeEnum::getAllValuesAsArray()),
+            'order'       => $this->faker->randomNumber(),
             'column_id'   => Column::factory(),
             'reporter_id' => User::factory(),
             'assignee_id' => User::factory(),

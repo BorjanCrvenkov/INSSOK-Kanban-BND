@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class User extends Authenticatable
 {
@@ -69,6 +71,7 @@ class User extends Authenticatable
             'last_name',
             'username',
             'email',
+            AllowedFilter::scope('workspace_id'),
         ];
     }
 
@@ -96,6 +99,17 @@ class User extends Authenticatable
             'watched_tasks',
             'workspaces',
         ];
+    }
+
+    public function scopeWorkspaceId($query, int $workspace_id)
+    {
+        $user_ids = UserWorkspace::where('workspace_id', '=', $workspace_id)
+            ->select('user_id')
+            ->get()
+            ->pluck('user_id')
+            ->toArray();
+
+        $query->whereIn('users.id', $user_ids);
     }
 
     /**
