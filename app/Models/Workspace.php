@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Workspace extends BaseModel
 {
+    protected $with = [
+        'users',
+    ];
+
     /**
      * @var array
      */

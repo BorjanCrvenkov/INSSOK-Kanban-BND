@@ -63,6 +63,7 @@ class Board extends BaseModel
             'workspace',
             'columns',
             'columns.tasks',
+            'workspace.users',
         ];
     }
 
