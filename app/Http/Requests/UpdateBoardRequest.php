@@ -26,7 +26,8 @@ class UpdateBoardRequest extends FormRequest
         return [
             'name'         => 'string',
             'description'  => 'string',
-            'workspace_id' => 'integer|exists:workspaces,id'
+            'workspace_id' => 'integer|exists:workspaces,id',
+            'task_prefix'  => 'string',
         ];
     }
 }

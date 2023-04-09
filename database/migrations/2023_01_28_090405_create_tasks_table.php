@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->date('due_date')->nullable();
             $table->string('type')->default(TaskTypeEnum::TASK->value);
             $table->integer('order')->nullable();
+            $table->string('label')->nullable();
             $table->foreignId('column_id')->references('id')->on('columns')->cascadeOnDelete();
             $table->foreignId('reporter_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('assignee_id')->nullable()->references('id')->on('users')->cascadeOnDelete();
