@@ -23,6 +23,7 @@ class Task extends BaseModel
         'column_id',
         'reporter_id',
         'assignee_id',
+        'label',
     ];
 
     /**

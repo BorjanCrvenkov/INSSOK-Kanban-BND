@@ -26,7 +26,8 @@ class StoreBoardRequest extends FormRequest
         return [
             'name'         => 'required|string',
             'description'  => 'required|string',
-            'workspace_id' => 'required|integer|exists:workspaces,id'
+            'workspace_id' => 'required|integer|exists:workspaces,id',
+            'task_prefix'  => 'required|string',
         ];
     }
 }

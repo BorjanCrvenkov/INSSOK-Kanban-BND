@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -15,6 +17,7 @@ class Board extends BaseModel
         'name',
         'description',
         'workspace_id',
+        'task_prefix',
     ];
 
     /**
@@ -81,5 +84,15 @@ class Board extends BaseModel
     public function columns(): HasMany
     {
         return $this->hasMany(Column::class)->orderBy('order');
+    }
+
+    /**
+     * @return Collection|Builder|array
+     */
+    public function tasks(): Collection|Builder|array
+    {
+        return Task::query()
+            ->join('columns', 'tasks.column_id', '=', 'columns.id')
+            ->where('columns.board_id', '=', $this->getKey())->get();
     }
 }

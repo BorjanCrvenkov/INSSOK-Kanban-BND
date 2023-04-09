@@ -34,6 +34,7 @@ class StoreTaskRequest extends FormRequest
             'order'       => 'nullable|integer',
             'column_id'   => 'required|integer|exists:columns,id',
             'assignee_id' => 'nullable|integer|exists:users,id',
+            'label'       => 'prohibited',
         ];
     }
 }

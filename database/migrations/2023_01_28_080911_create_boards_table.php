@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            //$table->integer('workspace_id');
+            $table->string('task_prefix');
             $table->foreignId('workspace_id')->references('id')->on('workspaces')->cascadeOnDelete();
             $table->timestamps();
             $table->index('workspace_id');
