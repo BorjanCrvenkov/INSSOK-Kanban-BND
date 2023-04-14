@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class Workspace extends BaseModel
 {
@@ -26,6 +28,7 @@ class Workspace extends BaseModel
     {
         return [
             'name',
+            AllowedFilter::scope('user_id')->default(Auth::id()),
         ];
     }
 
@@ -75,5 +78,20 @@ class Workspace extends BaseModel
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_workspaces');
+    }
+
+    /**
+     * @param $query
+     * @param $user_id
+     * @return void
+     */
+    public function scopeUserId($query, $user_id): void
+    {
+        if (Auth::user()->is_admin) {
+            return;
+        }
+
+        $query->join('user_workspaces', 'workspaces.id', '=', 'user_workspaces.workspace_id')
+            ->where('user_id', '=', $user_id);
     }
 }
