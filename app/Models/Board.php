@@ -66,6 +66,10 @@ class Board extends BaseModel
             'workspace',
             'columns',
             'columns.tasks',
+            'columns.tasks.assignee',
+            'columns.tasks.reporter',
+            'columns.tasks.comments',
+            'columns.tasks.comments.user',
             'workspace.users',
         ];
     }

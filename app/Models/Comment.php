@@ -43,4 +43,15 @@ class Comment extends BaseModel
     {
         return $this->belongsToMany(Task::class, 'user-task-comment'); // da se implement user-task-comment
     }
+
+    public function user(){
+        return $this->hasOneThrough(
+            User::class,
+            UserTaskComment::class,
+            'comment_id',
+            'id',
+            'id',
+            'user_id'
+        );
+    }
 }
