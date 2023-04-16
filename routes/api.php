@@ -3,8 +3,11 @@
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ColumnController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserTaskCommentController;
 use App\Http\Controllers\UserWorkspaceController;
 use App\Http\Controllers\WatchesController;
 use App\Http\Controllers\WorkspaceController;
@@ -54,11 +57,11 @@ Route::middleware('auth:sanctum')->group(function (){
 
     Route::apiResource('user_workspaces', UserWorkspaceController::class);
 
-    Route::apiResource('roles', RoleCollection::Class);
+    Route::apiResource('roles', RoleController::Class);
 
-    Route::apiResource('comments', CommentCollection::Class);
+    Route::apiResource('comments', CommentController::Class);
 
-    Route::apiResource('user-task-comment', UserTaskCommentCollection::Class);
+    Route::apiResource('user-task-comment', UserTaskCommentController::Class);
 });
 
 
