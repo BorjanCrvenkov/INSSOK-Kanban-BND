@@ -77,7 +77,7 @@ class Workspace extends BaseModel
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_workspaces')->withPivot('access_type');
+        return $this->belongsToMany(User::class, 'user_workspaces')->withPivot('access_type', 'id');
     }
 
     /**
