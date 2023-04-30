@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class Comment extends BaseModel
 {
@@ -19,32 +21,44 @@ class Comment extends BaseModel
     /**
      * @return string[]
      */
-    public function allowedIncludes(): array
+    public function allowedFilters(): array
     {
         return [
-            'usersCommented',
-            'commentOnTask',
+            'name',
+            AllowedFilter::scope('task_id'),
         ];
     }
 
-
     /**
-     * @return BelongsToMany
+     * @return string[]
      */
-    public function usersCommented(): BelongsToMany //dali e ok imeto na funkcijava?
+    public function allowedIncludes(): array
     {
-        return $this->belongsToMany(User::class, 'user-task-comment'); // da se implement user-task-comment
+        return [
+            'user',
+        ];
     }
 
     /**
-     * @return BelongsToMany
+     * @param $query
+     * @param $task_id
+     * @return void
      */
-    public function commentOnTask(): BelongsToMany //dali e ok imeto na funkcijava?
+    public function scopeTaskId($query, $task_id): void
     {
-        return $this->belongsToMany(Task::class, 'user-task-comment'); // da se implement user-task-comment
+        $query->whereExists(function ($query) use ($task_id){
+            $query->select('id')
+                ->from('user_task_comments')
+                ->where('user_task_comments.task_id', '=', $task_id)
+            ->whereColumn('comments.id', '=', 'user_task_comments.comment_id');
+        });
     }
 
-    public function user(){
+    /**
+     * @return HasOneThrough
+     */
+    public function user(): HasOneThrough
+    {
         return $this->hasOneThrough(
             User::class,
             UserTaskComment::class,
