@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\QueryBuilder\AllowedFilter;
 
-class Watches extends BaseModel
+class Follow extends BaseModel
 {
     /**
      * @var string[]

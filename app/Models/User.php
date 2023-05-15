@@ -96,7 +96,7 @@ class User extends Authenticatable
         return [
             'assigned_tasks',
             'reported_tasks',
-            'watched_tasks',
+            'followed_tasks',
             'workspaces',
         ];
     }
@@ -147,9 +147,9 @@ class User extends Authenticatable
     /**
      * @return BelongsToMany
      */
-    public function watched_tasks(): BelongsToMany
+    public function followed_tasks(): BelongsToMany
     {
-        return $this->belongsToMany(Task::class, 'watches');
+        return $this->belongsToMany(Task::class, 'follows');
     }
 
     /**
