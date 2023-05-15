@@ -17,7 +17,6 @@ class FollowPolicy
      */
     public function before(?User $user): ?bool
     {
-        dd('asdasdasd');
         if (isset($user) && $user->is_admin) {
             return true;
         }
