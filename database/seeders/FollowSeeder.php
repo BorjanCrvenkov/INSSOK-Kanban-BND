@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Watches;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Follow;
 use Illuminate\Database\Seeder;
 
-class WatchesSeeder extends Seeder
+class FollowSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +16,7 @@ class WatchesSeeder extends Seeder
      */
     public function run(int $user_id, int $task_id): void
     {
-        $exists = Watches::query()->where('user_id', '=', $user_id)
+        $exists = Follow::query()->where('user_id', '=', $user_id)
             ->where('task_id', '=', $task_id)
             ->exists();
 
@@ -25,7 +24,7 @@ class WatchesSeeder extends Seeder
             return;
         }
 
-        Watches::factory()->create([
+        Follow::factory()->create([
             'user_id' => $user_id,
             'task_id' => $task_id,
         ]);

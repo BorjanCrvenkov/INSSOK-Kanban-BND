@@ -2,11 +2,12 @@
 
 namespace App\Policies;
 
+use App\Models\Follow;
 use App\Models\User;
-use App\Models\Watches;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
-class WatchesPolicy
+class FollowPolicy
 {
     use HandlesAuthorization;
 
@@ -16,6 +17,7 @@ class WatchesPolicy
      */
     public function before(?User $user): ?bool
     {
+        dd('asdasdasd');
         if (isset($user) && $user->is_admin) {
             return true;
         }
@@ -38,10 +40,10 @@ class WatchesPolicy
      * Determine whether the user can view the model.
      *
      * @param User $user
-     * @param Watches $watches
+     * @param Follow $follow
      * @return bool
      */
-    public function view(User $user, Watches $watches): bool
+    public function view(User $user, Follow $follow): bool
     {
         return true;
     }
@@ -61,23 +63,22 @@ class WatchesPolicy
      * Determine whether the user can update the model.
      *
      * @param User $user
-     * @param Watches $watches
+     * @param Follow $follow
      * @return bool|false
      */
-    public function update(User $user, Watches $watches): bool
+    public function update(User $user, Follow $follow): bool
     {
         return false;
     }
-
     /**
      * Determine whether the user can delete the model.
      *
      * @param User $user
-     * @param Watches $watches
+     * @param Follow $follow
      * @return bool
      */
-    public function delete(User $user, Watches $watches): bool
+    public function delete(User $user, Follow $follow): bool
     {
-        return $watches->user_id = $user->getKey();
+        return $follow->user_id == $user->getKey();
     }
 }

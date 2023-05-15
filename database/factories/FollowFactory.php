@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends Factory
  */
-class WatchesFactory extends Factory
+class FollowFactory  extends Factory
 {
     /**
      * Define the model's default state.
@@ -24,3 +24,4 @@ class WatchesFactory extends Factory
         ];
     }
 }
+

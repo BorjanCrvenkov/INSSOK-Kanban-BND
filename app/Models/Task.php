@@ -52,7 +52,7 @@ class Task extends BaseModel
             'column',
             'assignee',
             'reporter',
-            'users_watched_by',
+            'users_followed_by',
             'comments',
         ];
     }
@@ -95,9 +95,9 @@ class Task extends BaseModel
     /**
      * @return BelongsToMany
      */
-    public function users_watched_by(): BelongsToMany
+    public function users_followed_by(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'watches');
+        return $this->belongsToMany(User::class, 'follows');
     }
 
     /**

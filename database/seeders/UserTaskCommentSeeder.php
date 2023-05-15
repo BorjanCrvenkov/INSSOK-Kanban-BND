@@ -9,9 +9,9 @@ use Illuminate\Database\Seeder;
 class UserTaskCommentSeeder extends Seeder
 {
     /**
-     * @param WatchesSeeder $watches_seeder
+     * @param FollowSeeder $followSeeder
      */
-    public function __construct(public WatchesSeeder $watches_seeder)
+    public function __construct(public FollowSeeder $followSeeder)
     {
     }
 
@@ -29,6 +29,6 @@ class UserTaskCommentSeeder extends Seeder
             'task_id' => $task_id,
         ]);
 
-        $this->watches_seeder->run($user_id, $task_id);
+        $this->followSeeder->run($user_id, $task_id);
     }
 }
