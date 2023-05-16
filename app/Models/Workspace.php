@@ -91,7 +91,11 @@ class Workspace extends BaseModel
             return;
         }
 
-        $query->join('user_workspaces', 'workspaces.id', '=', 'user_workspaces.workspace_id')
-            ->where('user_id', '=', $user_id);
+        $query->whereExists(function ($query) use($user_id) {
+            $query->selectRaw('1')
+                ->from('user_workspaces')
+                ->whereColumn('workspaces.id', '=', 'user_workspaces.workspace_id')
+                ->where('user_workspaces.user_id', '=', $user_id);
+        });
     }
 }
