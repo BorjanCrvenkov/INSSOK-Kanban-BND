@@ -2,12 +2,16 @@
 
 namespace App\Services;
 
+use App\Jobs\NotifyFollowersAboutTaskUpdateJob;
+use App\Mail\TaskUpdatedMail;
 use App\Models\BaseModel;
 use App\Models\Column;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use function PHPUnit\Framework\isEmpty;
 
 class TaskService extends BaseService
 {
@@ -49,5 +53,26 @@ class TaskService extends BaseService
         $task->update([
             'label' => $label,
         ]);
+    }
+
+    public function update(int $id, array $data): BaseModel|User
+    {
+        $task = $this->show($id);
+
+        $oldAttributes = $task->getAttributes();
+
+        $task->update($data);
+
+        $changes = $task->getChanges();
+
+        if(!empty($changes)){
+            $followers = $task->users_followed_by;
+
+            foreach ($followers as $follower){
+                Mail::to($follower->email)->send(new TaskUpdatedMail($task, $oldAttributes, $changes));
+            }
+        }
+
+        return  $task;
     }
 }
