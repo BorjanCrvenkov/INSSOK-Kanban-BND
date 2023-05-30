@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreColumnRequest;
 use App\Http\Requests\UpdateColumnRequest;
-use App\Http\Resources\ColumnCollection;
-use App\Http\Resources\ColumnResource;
 use App\Http\Responses\CustomResponse;
 use App\Models\Column;
 use App\Services\ColumnService;
@@ -21,7 +19,7 @@ class ColumnController extends Controller
     public function __construct(Column $model, ColumnService $service, CustomResponse $response)
     {
         $authParam = 'column';
-        parent::__construct($model, $service, $response, ColumnResource::class, ColumnCollection::class, $authParam);
+        parent::__construct($model, $service, $response, $authParam);
     }
 
     /**

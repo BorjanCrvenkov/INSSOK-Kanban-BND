@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
-use App\Http\Resources\TaskCollection;
-use App\Http\Resources\TaskResource;
 use App\Http\Responses\CustomResponse;
 use App\Models\Task;
 use App\Services\TaskService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -23,7 +19,7 @@ class TaskController extends Controller
     public function __construct(Task $model, TaskService $service, CustomResponse $response)
     {
         $authParam = 'task';
-        parent::__construct($model, $service, $response, TaskResource::class, TaskCollection::class, $authParam);
+        parent::__construct($model, $service, $response, $authParam);
     }
 
     /**

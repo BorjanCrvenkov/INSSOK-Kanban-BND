@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
-use App\Http\Resources\CommentCollection;
-use App\Http\Resources\CommentResource;
 use App\Http\Responses\CustomResponse;
 use App\Models\Comment;
 use App\Services\CommentService;
@@ -21,7 +19,7 @@ class CommentController extends Controller
     public function __construct(Comment $model, CommentService $service, CustomResponse $response)
     {
         $authParam = 'comment';
-        parent::__construct($model, $service, $response, CommentResource::class, CommentCollection::class, $authParam);
+        parent::__construct($model, $service, $response, $authParam);
     }
     /**
      * Display a listing of the resource.

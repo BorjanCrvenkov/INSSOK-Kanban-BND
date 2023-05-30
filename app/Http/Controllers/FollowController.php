@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFollowRequest;
-use App\Http\Resources\FollowCollection;
-use App\Http\Resources\FollowResource;
 use App\Http\Responses\CustomResponse;
 use App\Models\Follow;
 use App\Services\FollowService;
@@ -20,7 +18,7 @@ class FollowController extends Controller
     public function __construct(Follow $model, FollowService $service, CustomResponse $response)
     {
         $authParam = 'follow';
-        parent::__construct($model, $service, $response, FollowResource::class, FollowCollection::class, $authParam);
+        parent::__construct($model, $service, $response, $authParam);
     }
     /**
      * Display a listing of the resource.

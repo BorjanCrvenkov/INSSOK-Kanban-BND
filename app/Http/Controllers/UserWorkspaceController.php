@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserWorkspaceRequest;
 use App\Http\Requests\UpdateUserWorkspaceRequest;
-use App\Http\Resources\UserWorkspaceCollection;
-use App\Http\Resources\UserWorkspaceResource;
 use App\Http\Responses\CustomResponse;
 use App\Models\UserWorkspace;
 use App\Services\UserWorkspaceService;
@@ -21,8 +19,7 @@ class UserWorkspaceController extends Controller
     public function __construct(UserWorkspace $model, UserWorkspaceService $service, CustomResponse $response)
     {
         $authParam = 'user_workspace';
-        parent::__construct($model, $service, $response, UserWorkspaceResource::class,
-            UserWorkspaceCollection::class, $authParam);
+        parent::__construct($model, $service, $response, $authParam);
     }
 
     /**
