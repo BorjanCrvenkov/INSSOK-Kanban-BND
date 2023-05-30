@@ -22,13 +22,9 @@ class Controller extends BaseController
      * @param BaseModel|User $model
      * @param BaseService $service
      * @param CustomResponse $response
-     * @param string $resource
-     * @param string $collection
      * @param string $authParam
      */
-    public function __construct(public BaseModel|User $model, public BaseService $service, public CustomResponse $response,
-                                public string         $resource, public string $collection,
-                                public string         $authParam)
+    public function __construct(public BaseModel|User $model, public BaseService $service, public CustomResponse $response, public string $authParam)
     {
         $this->authorizeResource($this->model::class, $this->authParam);
     }
@@ -51,7 +47,7 @@ class Controller extends BaseController
     {
         $validatedData = $request->validated();
 
-        $modelData = new $this->resource($this->service->store($validatedData));
+        $modelData = $this->service->store($validatedData)->toArray();
 
         return $this->response->success(data: $modelData);
     }
@@ -76,7 +72,7 @@ class Controller extends BaseController
     {
         $validatedData = $request->validated();
 
-        $modelData = new $this->resource($this->service->update($model->id, $validatedData));
+        $modelData = $this->service->update($model->id, $validatedData)->toArray();
 
         return $this->response->success(data: $modelData);
     }

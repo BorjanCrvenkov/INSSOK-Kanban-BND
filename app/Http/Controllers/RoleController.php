@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
-use App\Http\Resources\RoleCollection;
-use App\Http\Resources\RoleResource;
 use App\Http\Responses\CustomResponse;
 use App\Models\Role;
 use App\Services\RoleService;
@@ -21,7 +19,7 @@ class RoleController extends Controller
     public function __construct(Role $model, RoleService $service, CustomResponse $response)
     {
         $authParam = 'role';
-        parent::__construct($model, $service, $response, RoleResource::class, RoleCollection::class, $authParam);
+        parent::__construct($model, $service, $response, $authParam);
     }
 
 

@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
 use App\Http\Responses\CustomResponse;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -22,7 +19,7 @@ class UserController extends Controller
     public function __construct(User $model, UserService $service, CustomResponse $response)
     {
         $authParam = 'user';
-        parent::__construct($model, $service, $response, UserResource::class, UserCollection::class, $authParam);
+        parent::__construct($model, $service, $response, $authParam);
     }
 
     /**

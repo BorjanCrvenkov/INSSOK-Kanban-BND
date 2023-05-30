@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserTaskCommentRequest;
-use App\Http\Requests\UpdateUserTaskCommentRequest;
-use App\Http\Resources\UserTaskCommentCollection;
-use App\Http\Resources\UserTaskCommentResource;
 use App\Http\Responses\CustomResponse;
 use App\Models\UserTaskComment;
 use App\Services\UserTaskCommentService;
@@ -21,7 +18,7 @@ class UserTaskCommentController extends Controller
     public function __construct(UserTaskComment $model, UserTaskCommentService $service, CustomResponse $response)
     {
         $authParam = 'user_task_comment';
-        parent::__construct($model, $service, $response, UserTaskCommentResource::class, UserTaskCommentCollection::class, $authParam);
+        parent::__construct($model, $service, $response, $authParam);
     }
     /**
      * Display a listing of the resource.

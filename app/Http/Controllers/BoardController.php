@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBoardRequest;
 use App\Http\Requests\UpdateBoardRequest;
-use App\Http\Resources\BoardCollection;
-use App\Http\Resources\BoardResource;
 use App\Http\Responses\CustomResponse;
 use App\Models\Board;
 use App\Services\BoardService;
@@ -21,7 +19,7 @@ class BoardController extends Controller
     public function __construct(Board $model, BoardService $service, CustomResponse $response)
     {
         $authParam = 'board';
-        parent::__construct($model, $service, $response, BoardResource::class, BoardCollection::class, $authParam);
+        parent::__construct($model, $service, $response, $authParam);
     }
 
 
