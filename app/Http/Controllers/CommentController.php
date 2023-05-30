@@ -9,6 +9,10 @@ use App\Models\Comment;
 use App\Services\CommentService;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Comment routes
+ *
+ */
 class CommentController extends Controller
 {
     /**
@@ -21,10 +25,20 @@ class CommentController extends Controller
         $authParam = 'comment';
         parent::__construct($model, $service, $response, $authParam);
     }
+
     /**
-     * Display a listing of the resource.
+     * Comment index
+     *
+     * @queryParam include Available includes: user, task
+     * Example: include=user
+     * Multiple includes example: include=user,task
+     *
+     * @queryParam filter['filter_name'] Available filters: name, task_id
+     * Example: filter[name]=test.
+     * Multiple filters example: filter[name]=test&filter[task_id]=1
      *
      * @return JsonResponse
+     * @authenticated
      */
     public function index()
     {
@@ -36,6 +50,7 @@ class CommentController extends Controller
      *
      * @param StoreCommentRequest $request
      * @return JsonResponse
+     * @authenticated
      */
     public function store(StoreCommentRequest $request)
     {
@@ -47,6 +62,7 @@ class CommentController extends Controller
      *
      * @param Comment $comment
      * @return JsonResponse
+     * @authenticated
      */
     public function show(Comment $comment)
     {
@@ -60,6 +76,7 @@ class CommentController extends Controller
      * @param UpdateCommentRequest $request
      * @param Comment $comment
      * @return JsonResponse
+     * @authenticated
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
@@ -71,6 +88,7 @@ class CommentController extends Controller
      *
      * @param Comment $comment
      * @return JsonResponse
+     * @authenticated
      */
     public function destroy(Comment $comment)
     {

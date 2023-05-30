@@ -20,10 +20,12 @@ class UserTaskCommentController extends Controller
         $authParam = 'user_task_comment';
         parent::__construct($model, $service, $response, $authParam);
     }
+
     /**
      * Display a listing of the resource.
      *
      * @return JsonResponse
+     * @authenticated
      */
     public function index()
     {
@@ -35,6 +37,7 @@ class UserTaskCommentController extends Controller
      *
      * @param StoreUserTaskCommentRequest $request
      * @return JsonResponse
+     * @authenticated
      */
     public function store(StoreUserTaskCommentRequest $request)
     {
@@ -46,6 +49,7 @@ class UserTaskCommentController extends Controller
      *
      * @param UserTaskComment $userTaskComment
      * @return JsonResponse
+     * @authenticated
      */
     public function show(UserTaskComment $userTaskComment)
     {
@@ -57,6 +61,7 @@ class UserTaskCommentController extends Controller
      *
      * @param UserTaskComment $userTaskComment
      * @return JsonResponse
+     * @authenticated
      */
     public function destroy(UserTaskComment $userTaskComment)
     {

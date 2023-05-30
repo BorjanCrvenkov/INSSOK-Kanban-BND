@@ -9,6 +9,10 @@ use App\Models\Board;
 use App\Services\BoardService;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Board routes
+ *
+ */
 class BoardController extends Controller
 {
     /**
@@ -24,9 +28,25 @@ class BoardController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * Board index
+     *
+     * Default sort: name
+     *
+     * @queryParam filter['filter_name'] Available filters: name, description, workspace_id.
+     * Example: filter[name]=test.
+     * Multiple filters example: filter[name]=test&filter[workspace_id]=1.
+     *
+     * @queryParam sort Available sorts: name, description, workspace_id.
+     * Adding - before the sort name will sort in descending order.
+     * Example: sort=name.
+     * Multiple sorts example: sort=name,workspace_id.
+     *
+     * @queryParam include Available includes: workspace, columns, columns.tasks, columns.tasks.assignee, columns.tasks.reporter, columns.tasks.comments, columns.tasks.comments.user, workspace.users
+     * Example: include=workspace
+     * Multiple includes example: include=workspace,columns
      *
      * @return JsonResponse
+     * @authenticated
      */
     public function index()
     {
@@ -34,10 +54,11 @@ class BoardController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Boards store
      *
      * @param StoreBoardRequest $request
      * @return JsonResponse
+     * @authenticated
      */
     public function store(StoreBoardRequest $request)
     {
@@ -45,10 +66,15 @@ class BoardController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Board show
+     *
+     * @queryParam include Available includes: workspace, columns, columns.tasks, columns.tasks.assignee, columns.tasks.reporter, columns.tasks.comments, columns.tasks.comments.user, workspace.users
+     * Example: include=workspace
+     * Multiple includes example: include=workspace,columns
      *
      * @param Board $board
      * @return JsonResponse
+     * @authenticated
      */
     public function show(Board $board)
     {
@@ -56,11 +82,12 @@ class BoardController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Board update
      *
      * @param UpdateBoardRequest $request
      * @param Board $board
      * @return JsonResponse
+     * @authenticated
      */
     public function update(UpdateBoardRequest $request, Board $board)
     {
@@ -68,10 +95,11 @@ class BoardController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Board delete
      *
      * @param Board $board
      * @return JsonResponse
+     * @authenticated
      */
     public function destroy(Board $board)
     {

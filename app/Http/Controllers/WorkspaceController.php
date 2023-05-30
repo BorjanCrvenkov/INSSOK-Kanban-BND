@@ -26,6 +26,7 @@ class WorkspaceController extends Controller
      * Display a listing of the resource.
      *
      * @return JsonResponse
+     * @authenticated
      */
     public function index(): JsonResponse
     {
@@ -37,6 +38,7 @@ class WorkspaceController extends Controller
      *
      * @param StoreWorkspaceRequest $request
      * @return JsonResponse
+     * @authenticated
      */
     public function store(StoreWorkspaceRequest $request): JsonResponse
     {
@@ -48,6 +50,7 @@ class WorkspaceController extends Controller
      *
      * @param Workspace $workspace
      * @return JsonResponse
+     * @authenticated
      */
     public function show(Workspace $workspace): JsonResponse
     {
@@ -60,6 +63,7 @@ class WorkspaceController extends Controller
      * @param UpdateWorkspaceRequest $request
      * @param Workspace $workspace
      * @return JsonResponse
+     * @authenticated
      */
     public function update(UpdateWorkspaceRequest $request, Workspace $workspace): JsonResponse
     {
@@ -71,6 +75,7 @@ class WorkspaceController extends Controller
      *
      * @param Workspace $workspace
      * @return JsonResponse
+     * @authenticated
      */
     public function destroy(Workspace $workspace): JsonResponse
     {

@@ -26,6 +26,7 @@ class TaskController extends Controller
      * Display a listing of the resource.
      *
      * @return JsonResponse
+     * @authenticated
      */
     public function index()
     {
@@ -37,6 +38,7 @@ class TaskController extends Controller
      *
      * @param StoreTaskRequest $request
      * @return JsonResponse
+     * @authenticated
      */
     public function store(StoreTaskRequest $request)
     {
@@ -48,6 +50,7 @@ class TaskController extends Controller
      *
      * @param Task $task
      * @return JsonResponse
+     * @authenticated
      */
     public function show(Task $task)
     {
@@ -60,6 +63,7 @@ class TaskController extends Controller
      * @param UpdateTaskRequest $request
      * @param Task $task
      * @return JsonResponse
+     * @authenticated
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
@@ -71,6 +75,7 @@ class TaskController extends Controller
      *
      * @param Task $task
      * @return JsonResponse
+     * @authenticated
      */
     public function destroy(Task $task)
     {

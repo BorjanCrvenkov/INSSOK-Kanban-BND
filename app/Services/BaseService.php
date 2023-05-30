@@ -46,8 +46,6 @@ abstract class BaseService
 
         return QueryBuilder::for($model::class)
             ->allowedIncludes($model->allowedIncludes())
-            ->defaultSorts($model->defaultSorts())
-            ->allowedSorts($model->allowedSorts())
             ->findOrFail($id);
     }
 

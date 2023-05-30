@@ -27,6 +27,7 @@ class RoleController extends Controller
      * Display a listing of the resource.
      *
      * @return JsonResponse
+     * @authenticated
      */
     public function index()
     {
@@ -38,6 +39,7 @@ class RoleController extends Controller
      *
      * @param StoreRoleRequest $request
      * @return JsonResponse
+     * @authenticated
      */
     public function store(StoreRoleRequest $request)
     {
@@ -49,6 +51,7 @@ class RoleController extends Controller
      *
      * @param Role $role
      * @return JsonResponse
+     * @authenticated
      */
     public function show(Role $role)
     {
@@ -62,6 +65,7 @@ class RoleController extends Controller
      * @param UpdateRoleRequest $request
      * @param Role $role
      * @return JsonResponse
+     * @authenticated
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
@@ -73,6 +77,7 @@ class RoleController extends Controller
      *
      * @param Role $role
      * @return JsonResponse
+     * @authenticated
      */
     public function destroy(Role $role)
     {
