@@ -16,7 +16,6 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-
         Role::factory()->create([
             'name' => RoleEnum::ADMINISTRATOR->value,
         ]);

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('order');
-            //$table->integer('board_id');
             $table->foreignId('board_id')->references('id')->on('boards')->cascadeOnDelete();
             $table->timestamps();
             $table->index('board_id');

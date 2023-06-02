@@ -20,6 +20,7 @@ class FollowController extends Controller
         $authParam = 'follow';
         parent::__construct($model, $service, $response, $authParam);
     }
+
     /**
      * Display a listing of the resource.
      *

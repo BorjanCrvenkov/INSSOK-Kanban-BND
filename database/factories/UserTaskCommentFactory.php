@@ -5,10 +5,11 @@ namespace Database\Factories;
 use App\Models\Comment;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\UserTaskComment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserTaskComment>
+ * @extends Factory
  */
 class UserTaskCommentFactory extends Factory
 {
@@ -17,7 +18,7 @@ class UserTaskCommentFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'user_id' => User::factory(),

@@ -19,10 +19,10 @@ class AuthenticationController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
-     * @param UserService $user_service
+     * @param UserService $userService
      * @param CustomResponse $customResponse
      */
-    public function __construct(public UserService $user_service, public CustomResponse $customResponse)
+    public function __construct(public UserService $userService, public CustomResponse $customResponse)
     {
     }
 
@@ -34,7 +34,7 @@ class AuthenticationController extends BaseController
     public function register(StoreUserRequest $request){
         $validated_data = $request->validated();
 
-        $user = $this->user_service->store($validated_data);
+        $user = $this->userService->store($validated_data);
 
         return $this->customResponse->success(data: $user->toArray());
     }
@@ -46,7 +46,7 @@ class AuthenticationController extends BaseController
     public function login(LoginRequest $request){
         $validated_data = $request->validated();
 
-        return $this->user_service->login($validated_data, $this->customResponse);
+        return $this->userService->login($validated_data, $this->customResponse);
     }
 
     /**

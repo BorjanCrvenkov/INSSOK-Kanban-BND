@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Models\Task;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -17,10 +16,10 @@ class UpdateTasksLabelAfterBoardTaskPrefixIsUpdatedJob implements ShouldQueue
 
     /**
      * Create a new job instance.
-     * @param string $task_prefix
-     * @param int $board_id
+     * @param string $taskPrefix
+     * @param int $boardId
      */
-    public function __construct(public string $task_prefix, public int $board_id)
+    public function __construct(public string $taskPrefix, public int $boardId)
     {
     }
 
@@ -33,9 +32,9 @@ class UpdateTasksLabelAfterBoardTaskPrefixIsUpdatedJob implements ShouldQueue
     {
         Task::query()
             ->join('columns', 'tasks.column_id', '=', 'columns.id')
-            ->where('columns.board_id', '=', $this->board_id)
+            ->where('columns.board_id', '=', $this->boardId)
             ->update([
-                'tasks.label' => DB::raw("CONCAT('{$this->task_prefix}-', split_part(tasks.label, '-', 2))")
+                'tasks.label' => DB::raw("CONCAT('{$this->taskPrefix}-', split_part(tasks.label, '-', 2))")
             ]);
     }
 }

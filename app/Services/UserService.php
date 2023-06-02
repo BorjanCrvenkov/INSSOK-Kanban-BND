@@ -66,7 +66,6 @@ class UserService extends BaseService
         return $user->delete();
     }
 
-
     /**
      * @param array $data
      * @param User|null $user
@@ -127,5 +126,4 @@ class UserService extends BaseService
 
         return $response->success('Successfully logged in user.', data: $user->toArray(), auth: $token->toArray());
     }
-
 }

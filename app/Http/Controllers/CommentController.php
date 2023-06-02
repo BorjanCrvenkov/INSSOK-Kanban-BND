@@ -53,7 +53,6 @@ class CommentController extends Controller
         return $this->showHelper($comment);
     }
 
-
     /**
      * Update the specified resource in storage.
      *

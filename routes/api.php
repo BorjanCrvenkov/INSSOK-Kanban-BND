@@ -58,7 +58,7 @@ Route::middleware('auth:sanctum')->group(function (){
 
     Route::apiResource('comments', CommentController::Class);
 
-    Route::apiResource('user-task-comment', UserTaskCommentController::Class);
+    Route::apiResource('user_task_comment', UserTaskCommentController::Class);
 });
 
 

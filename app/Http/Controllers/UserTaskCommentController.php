@@ -20,6 +20,7 @@ class UserTaskCommentController extends Controller
         $authParam = 'user_task_comment';
         parent::__construct($model, $service, $response, $authParam);
     }
+
     /**
      * Display a listing of the resource.
      *

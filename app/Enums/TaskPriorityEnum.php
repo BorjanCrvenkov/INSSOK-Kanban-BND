@@ -13,5 +13,4 @@ enum TaskPriorityEnum: string
     case MEDIUM = 'medium';
     case HIGH = 'high';
     case HIGHEST = 'highest';
-
 }

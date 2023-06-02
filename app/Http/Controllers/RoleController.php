@@ -22,7 +22,6 @@ class RoleController extends Controller
         parent::__construct($model, $service, $response, $authParam);
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +53,6 @@ class RoleController extends Controller
     {
         return $this->showHelper($role);
     }
-
 
     /**
      * Update the specified resource in storage.

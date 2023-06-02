@@ -29,7 +29,7 @@ class TaskUpdatedMail extends Mailable
      *
      * @return Envelope
      */
-    public function envelope()
+    public function envelope(): Envelope
     {
         return new Envelope(
             subject: "{$this->task->label} was updated!",
@@ -41,7 +41,7 @@ class TaskUpdatedMail extends Mailable
      *
      * @return Content
      */
-    public function content()
+    public function content(): Content
     {
         return new Content(
             view: 'task-update-mail-template',
@@ -53,7 +53,7 @@ class TaskUpdatedMail extends Mailable
      *
      * @return array
      */
-    public function attachments()
+    public function attachments(): array
     {
         return [];
     }
