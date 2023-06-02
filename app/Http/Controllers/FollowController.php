@@ -8,12 +8,17 @@ use App\Models\Follow;
 use App\Services\FollowService;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Follow routes
+ *
+ */
 class FollowController extends Controller
 {
     /**
      * @param Follow $model
      * @param FollowService $service
      * @param CustomResponse $response
+     * @authenticated
      */
     public function __construct(Follow $model, FollowService $service, CustomResponse $response)
     {
@@ -22,9 +27,14 @@ class FollowController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Follow index
+     *
+     * @queryParam filter['filter_name'] Available filters: user_id, task_id
+     * Example: filter[user_id]=1.
+     * Multiple filters example: filter[user_id]=1&filter[task_id]=1
      *
      * @return JsonResponse
+     * @authenticated
      */
     public function index()
     {
@@ -32,10 +42,11 @@ class FollowController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Follow store
      *
      * @param StoreFollowRequest $request
      * @return JsonResponse
+     * @authenticated
      */
     public function store(StoreFollowRequest $request)
     {
@@ -43,10 +54,11 @@ class FollowController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Follow show
      *
      * @param Follow $follow
      * @return JsonResponse
+     * @authenticated
      */
     public function show(Follow $follow)
     {
@@ -54,10 +66,11 @@ class FollowController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Follow delete
      *
      * @param Follow $follow
      * @return JsonResponse
+     * @authenticated
      */
     public function destroy(Follow $follow)
     {

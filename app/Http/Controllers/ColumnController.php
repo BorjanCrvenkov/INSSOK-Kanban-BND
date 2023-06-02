@@ -9,6 +9,10 @@ use App\Models\Column;
 use App\Services\ColumnService;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Column routes
+ *
+ */
 class ColumnController extends Controller
 {
     /**
@@ -23,9 +27,20 @@ class ColumnController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Column index
+     *
+     * Default sort: order
+     *
+     * @queryParam filter['filter_name'] Available filters: name, border_id
+     * Example: filter[name]=test.
+     * Multiple filters example: filter[name]=test&filter[border_id]=1
+     *
+     * @queryParam include Available includes: board, tasks
+     * Example: include=board
+     * Multiple includes example: include=board,task
      *
      * @return JsonResponse
+     * @authenticated
      */
     public function index()
     {
@@ -33,10 +48,11 @@ class ColumnController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Column store
      *
      * @param StoreColumnRequest $request
      * @return JsonResponse
+     * @authenticated
      */
     public function store(StoreColumnRequest $request)
     {
@@ -44,10 +60,15 @@ class ColumnController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Column show
+     *
+     * @queryParam include Available includes: board, tasks
+     * Example: include=board
+     * Multiple includes example: include=board,tasks
      *
      * @param Column $column
      * @return JsonResponse
+     * @authenticated
      */
     public function show(Column $column)
     {
@@ -55,11 +76,12 @@ class ColumnController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Column update
      *
      * @param UpdateColumnRequest $request
      * @param Column $column
      * @return JsonResponse
+     * @authenticated
      */
     public function update(UpdateColumnRequest $request, Column $column)
     {
@@ -67,10 +89,11 @@ class ColumnController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Column delete
      *
      * @param Column $column
      * @return JsonResponse
+     * @authenticated
      */
     public function destroy(Column $column)
     {

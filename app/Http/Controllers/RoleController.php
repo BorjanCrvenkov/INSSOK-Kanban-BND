@@ -9,6 +9,10 @@ use App\Models\Role;
 use App\Services\RoleService;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Role routes
+ *
+ */
 class RoleController extends Controller
 {
     /**
@@ -23,9 +27,19 @@ class RoleController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Role index
+     *
+     * Default sort: name
+     *
+     * @queryParam filter['filter_name'] Available filters: name
+     * Example: filter[name]=test.
+     *
+     * @queryParam sort Available sorts: name
+     * Adding - before the sort name will sort in descending order.
+     * Example: sort=name
      *
      * @return JsonResponse
+     * @authenticated
      */
     public function index()
     {
@@ -33,10 +47,11 @@ class RoleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Role store
      *
      * @param StoreRoleRequest $request
      * @return JsonResponse
+     * @authenticated
      */
     public function store(StoreRoleRequest $request)
     {
@@ -44,10 +59,11 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Role show
      *
      * @param Role $role
      * @return JsonResponse
+     * @authenticated
      */
     public function show(Role $role)
     {
@@ -55,11 +71,12 @@ class RoleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Role update
      *
      * @param UpdateRoleRequest $request
      * @param Role $role
      * @return JsonResponse
+     * @authenticated
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
@@ -67,10 +84,11 @@ class RoleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Role delete
      *
      * @param Role $role
      * @return JsonResponse
+     * @authenticated
      */
     public function destroy(Role $role)
     {

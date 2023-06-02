@@ -14,6 +14,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @group Authentication routes
+ *
+ */
 class AuthenticationController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -27,11 +31,15 @@ class AuthenticationController extends BaseController
     }
 
     /**
+     * Register
+     *
      * @param StoreUserRequest $request
      * @return JsonResponse
      * @throws Exception
+     * @unauthenticated
      */
-    public function register(StoreUserRequest $request){
+    public function register(StoreUserRequest $request)
+    {
         $validated_data = $request->validated();
 
         $user = $this->userService->store($validated_data);
@@ -40,16 +48,22 @@ class AuthenticationController extends BaseController
     }
 
     /**
+     * Login
+     *
      * @param LoginRequest $request
      * @return JsonResponse
+     * @unauthenticated
      */
-    public function login(LoginRequest $request){
+    public function login(LoginRequest $request)
+    {
         $validated_data = $request->validated();
 
         return $this->userService->login($validated_data, $this->customResponse);
     }
 
     /**
+     * Logout
+     *
      * @return JsonResponse
      */
     public function logout(): JsonResponse
@@ -62,7 +76,10 @@ class AuthenticationController extends BaseController
     }
 
     /**
+     * Return authenticated user
+     *
      * @return JsonResponse
+     * @authenticated
      */
     public function getAuthenticatedUser(): JsonResponse
     {
@@ -70,7 +87,10 @@ class AuthenticationController extends BaseController
     }
 
     /**
+     * Refresh token
+     *
      * @return JsonResponse
+     * @authenticated
      */
     public function refreshToken(): JsonResponse
     {

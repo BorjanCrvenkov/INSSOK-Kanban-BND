@@ -1,0 +1,300 @@
+name: 'Column routes'
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/columns
+    metadata:
+      groupName: 'Column routes'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Column index'
+      description: 'Default sort: order'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      "filter['filter_name']":
+        name: "filter['filter_name']"
+        description: 'Available filters: name, border_id'
+        required: false
+        example: |-
+          filter[name]=test.
+          Multiple filters example: filter[name]=test&filter[border_id]=1
+        type: string
+        custom: []
+      include:
+        name: include
+        description: 'Available includes: board, tasks'
+        required: false
+        example: |-
+          include=board
+          Multiple includes example: include=board,task
+        type: string
+        custom: []
+    cleanQueryParameters:
+      "filter['filter_name']": |-
+        filter[name]=test.
+        Multiple filters example: filter[name]=test&filter[border_id]=1
+      include: |-
+        include=board
+        Multiple includes example: include=board,task
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/columns
+    metadata:
+      groupName: 'Column routes'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Column store'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: true
+        example: consequatur
+        type: string
+        custom: []
+      order:
+        name: order
+        description: ''
+        required: true
+        example: 17
+        type: integer
+        custom: []
+      board_id:
+        name: board_id
+        description: ''
+        required: true
+        example: 17
+        type: integer
+        custom: []
+    cleanBodyParameters:
+      name: consequatur
+      order: 17
+      board_id: 17
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/columns/{id}'
+    metadata:
+      groupName: 'Column routes'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Column show'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the column.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters:
+      include:
+        name: include
+        description: 'Available includes: board, tasks'
+        required: false
+        example: |-
+          include=board
+          Multiple includes example: include=board,tasks
+        type: string
+        custom: []
+    cleanQueryParameters:
+      include: |-
+        include=board
+        Multiple includes example: include=board,tasks
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/columns/{id}'
+    metadata:
+      groupName: 'Column routes'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Column update'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the column.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        custom: []
+      order:
+        name: order
+        description: ''
+        required: false
+        example: 17
+        type: integer
+        custom: []
+      board_id:
+        name: board_id
+        description: ''
+        required: false
+        example: 17
+        type: integer
+        custom: []
+    cleanBodyParameters:
+      name: consequatur
+      order: 17
+      board_id: 17
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/columns/{id}'
+    metadata:
+      groupName: 'Column routes'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Column delete'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the column.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3V5EgbkvZcDPa166h8fd4ae'
+    controller: null
+    method: null
+    route: null
+    custom: []

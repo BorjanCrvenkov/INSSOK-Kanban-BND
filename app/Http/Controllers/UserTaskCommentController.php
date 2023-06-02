@@ -8,6 +8,10 @@ use App\Models\UserTaskComment;
 use App\Services\UserTaskCommentService;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group UserTaskComment routes
+ *
+ */
 class UserTaskCommentController extends Controller
 {
     /**
@@ -22,9 +26,14 @@ class UserTaskCommentController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * UserTaskComment index
+     *
+     * @queryParam filter['filter_name'] Available filters: user_id, task_id, comment_id
+     * Example: filter[user_id]=1.
+     * Multiple filters example: filter[user_id]=1&filter[task_id]=2
      *
      * @return JsonResponse
+     * @authenticated
      */
     public function index()
     {
@@ -32,10 +41,11 @@ class UserTaskCommentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * UserTaskComment store
      *
      * @param StoreUserTaskCommentRequest $request
      * @return JsonResponse
+     * @authenticated
      */
     public function store(StoreUserTaskCommentRequest $request)
     {
@@ -43,10 +53,11 @@ class UserTaskCommentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * UserTaskComment show
      *
      * @param UserTaskComment $userTaskComment
      * @return JsonResponse
+     * @authenticated
      */
     public function show(UserTaskComment $userTaskComment)
     {
@@ -54,10 +65,11 @@ class UserTaskCommentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * UserTaskComment delete
      *
      * @param UserTaskComment $userTaskComment
      * @return JsonResponse
+     * @authenticated
      */
     public function destroy(UserTaskComment $userTaskComment)
     {
