@@ -9,6 +9,10 @@ use App\Models\UserWorkspace;
 use App\Services\UserWorkspaceService;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group UserWorkspace routes
+ *
+ */
 class UserWorkspaceController extends Controller
 {
     /**
@@ -23,7 +27,15 @@ class UserWorkspaceController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * UserWorkspace index
+     *
+     * @queryParam filter['filter_name'] Available filters: user_id, workspace_id, access_type
+     * Example: filter[user_id]=1.
+     * Multiple filters example: filter[user_id]=1&filter[workspace_id]=1
+     *
+     * @queryParam sort Available sorts: access_type
+     * Adding - before the sort name will sort in descending order.
+     * Example: sort=access_type
      *
      * @return JsonResponse
      * @authenticated
@@ -34,7 +46,7 @@ class UserWorkspaceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * UserWorkspace store
      *
      * @param StoreUserWorkspaceRequest $request
      * @return JsonResponse
@@ -46,7 +58,7 @@ class UserWorkspaceController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * UserWorkspace show
      *
      * @param UserWorkspace $userWorkspace
      * @return JsonResponse
@@ -58,7 +70,7 @@ class UserWorkspaceController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * UserWorkspace update
      *
      * @param UpdateUserWorkspaceRequest $request
      * @param UserWorkspace $userWorkspace
@@ -71,7 +83,7 @@ class UserWorkspaceController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * UserWorkspace delete
      *
      * @param UserWorkspace $userWorkspace
      * @return JsonResponse

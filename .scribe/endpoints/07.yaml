@@ -1,17 +1,17 @@
-name: 'Column routes'
+name: 'UserWorkspace routes'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/columns
+    uri: api/user_workspaces
     metadata:
-      groupName: 'Column routes'
+      groupName: 'UserWorkspace routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column index'
-      description: 'Default sort: order'
+      title: 'UserWorkspace index'
+      description: ''
       authenticated: true
       custom: []
     headers:
@@ -23,29 +23,27 @@ endpoints:
     queryParameters:
       "filter['filter_name']":
         name: "filter['filter_name']"
-        description: 'Available filters: name, border_id'
+        description: 'Available filters: user_id, workspace_id, access_type'
         required: false
         example: |-
-          filter[name]=test.
-          Multiple filters example: filter[name]=test&filter[border_id]=1
+          filter[user_id]=1.
+          Multiple filters example: filter[user_id]=1&filter[workspace_id]=1
         type: string
         custom: []
-      include:
-        name: include
-        description: 'Available includes: board, tasks'
+      sort:
+        name: sort
+        description: |-
+          Available sorts: access_type
+          Adding - before the sort name will sort in descending order.
         required: false
-        example: |-
-          include=board
-          Multiple includes example: include=board,task
+        example: sort=access_type
         type: string
         custom: []
     cleanQueryParameters:
       "filter['filter_name']": |-
-        filter[name]=test.
-        Multiple filters example: filter[name]=test&filter[border_id]=1
-      include: |-
-        include=board
-        Multiple includes example: include=board,task
+        filter[user_id]=1.
+        Multiple filters example: filter[user_id]=1&filter[workspace_id]=1
+      sort: sort=access_type
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -71,13 +69,13 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/columns
+    uri: api/user_workspaces
     metadata:
-      groupName: 'Column routes'
+      groupName: 'UserWorkspace routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column store'
+      title: 'UserWorkspace store'
       description: ''
       authenticated: true
       custom: []
@@ -90,31 +88,31 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      name:
-        name: name
+      user_id:
+        name: user_id
         description: ''
         required: true
-        example: consequatur
+        example: 17
+        type: integer
+        custom: []
+      workspace_id:
+        name: workspace_id
+        description: ''
+        required: true
+        example: 17
+        type: integer
+        custom: []
+      access_type:
+        name: access_type
+        description: 'Must be one of <code>admin</code>, <code>manager</code>, or <code>user</code>.'
+        required: true
+        example: admin
         type: string
         custom: []
-      order:
-        name: order
-        description: ''
-        required: true
-        example: 17
-        type: integer
-        custom: []
-      board_id:
-        name: board_id
-        description: ''
-        required: true
-        example: 17
-        type: integer
-        custom: []
     cleanBodyParameters:
-      name: consequatur
-      order: 17
-      board_id: 17
+      user_id: 17
+      workspace_id: 17
+      access_type: admin
     fileParameters: []
     responses: []
     responseFields: []
@@ -129,13 +127,13 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/columns/{id}'
+    uri: 'api/user_workspaces/{id}'
     metadata:
-      groupName: 'Column routes'
+      groupName: 'UserWorkspace routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column show'
+      title: 'UserWorkspace show'
       description: ''
       authenticated: true
       custom: []
@@ -146,27 +144,15 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the column.'
+        description: 'The ID of the user workspace.'
         required: true
         example: 1
         type: integer
         custom: []
     cleanUrlParameters:
       id: 1
-    queryParameters:
-      include:
-        name: include
-        description: 'Available includes: board, tasks'
-        required: false
-        example: |-
-          include=board
-          Multiple includes example: include=board,tasks
-        type: string
-        custom: []
-    cleanQueryParameters:
-      include: |-
-        include=board
-        Multiple includes example: include=board,tasks
+    queryParameters: []
+    cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -193,13 +179,13 @@ endpoints:
     httpMethods:
       - PUT
       - PATCH
-    uri: 'api/columns/{id}'
+    uri: 'api/user_workspaces/{id}'
     metadata:
-      groupName: 'Column routes'
+      groupName: 'UserWorkspace routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column update'
+      title: 'UserWorkspace update'
       description: ''
       authenticated: true
       custom: []
@@ -210,7 +196,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the column.'
+        description: 'The ID of the user workspace.'
         required: true
         example: 1
         type: integer
@@ -220,31 +206,15 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      name:
-        name: name
-        description: ''
-        required: false
-        example: consequatur
+      access_type:
+        name: access_type
+        description: 'Must be one of <code>admin</code>, <code>manager</code>, or <code>user</code>.'
+        required: true
+        example: admin
         type: string
         custom: []
-      order:
-        name: order
-        description: ''
-        required: false
-        example: 17
-        type: integer
-        custom: []
-      board_id:
-        name: board_id
-        description: ''
-        required: false
-        example: 17
-        type: integer
-        custom: []
     cleanBodyParameters:
-      name: consequatur
-      order: 17
-      board_id: 17
+      access_type: admin
     fileParameters: []
     responses: []
     responseFields: []
@@ -259,13 +229,13 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/columns/{id}'
+    uri: 'api/user_workspaces/{id}'
     metadata:
-      groupName: 'Column routes'
+      groupName: 'UserWorkspace routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column delete'
+      title: 'UserWorkspace delete'
       description: ''
       authenticated: true
       custom: []
@@ -276,7 +246,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the column.'
+        description: 'The ID of the user workspace.'
         required: true
         example: 1
         type: integer

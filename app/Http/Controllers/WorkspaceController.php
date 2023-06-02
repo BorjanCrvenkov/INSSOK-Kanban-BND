@@ -9,6 +9,10 @@ use App\Models\Workspace;
 use App\Services\WorkspaceService;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Workspace routes
+ *
+ */
 class WorkspaceController extends Controller
 {
     /**
@@ -23,7 +27,21 @@ class WorkspaceController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Workspace index
+     *
+     * Default sort: name
+     *
+     * @queryParam filter['filter_name'] Available filters: name, user_id
+     * Example: filter[name]=test.
+     * Multiple filters example: filter[user_id]=1&filter[name]=test
+     *
+     * @queryParam sort Available sorts: name
+     * Adding - before the sort name will sort in descending order.
+     * Example: sort=name
+     *
+     * @queryParam include Available includes: boards, users
+     * Example: include=boards
+     * Multiple includes example: include=boards,users
      *
      * @return JsonResponse
      * @authenticated
@@ -34,7 +52,7 @@ class WorkspaceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Workspace store
      *
      * @param StoreWorkspaceRequest $request
      * @return JsonResponse
@@ -46,7 +64,11 @@ class WorkspaceController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Workspace show
+     *
+     * @queryParam include Available includes: boards, users
+     * Example: include=boards
+     * Multiple includes example: include=boards,users
      *
      * @param Workspace $workspace
      * @return JsonResponse
@@ -58,7 +80,7 @@ class WorkspaceController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Workspace update
      *
      * @param UpdateWorkspaceRequest $request
      * @param Workspace $workspace
@@ -71,7 +93,7 @@ class WorkspaceController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Workspace delete
      *
      * @param Workspace $workspace
      * @return JsonResponse

@@ -1,17 +1,17 @@
-name: 'Column routes'
+name: 'Comment routes'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/columns
+    uri: api/comments
     metadata:
-      groupName: 'Column routes'
+      groupName: 'Comment routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column index'
-      description: 'Default sort: order'
+      title: 'Comment index'
+      description: ''
       authenticated: true
       custom: []
     headers:
@@ -21,31 +21,31 @@ endpoints:
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
+      include:
+        name: include
+        description: 'Available includes: user, task'
+        required: false
+        example: |-
+          include=user
+          Multiple includes example: include=user,task
+        type: string
+        custom: []
       "filter['filter_name']":
         name: "filter['filter_name']"
-        description: 'Available filters: name, border_id'
+        description: 'Available filters: name, task_id'
         required: false
         example: |-
           filter[name]=test.
-          Multiple filters example: filter[name]=test&filter[border_id]=1
-        type: string
-        custom: []
-      include:
-        name: include
-        description: 'Available includes: board, tasks'
-        required: false
-        example: |-
-          include=board
-          Multiple includes example: include=board,task
+          Multiple filters example: filter[name]=test&filter[task_id]=1
         type: string
         custom: []
     cleanQueryParameters:
+      include: |-
+        include=user
+        Multiple includes example: include=user,task
       "filter['filter_name']": |-
         filter[name]=test.
-        Multiple filters example: filter[name]=test&filter[border_id]=1
-      include: |-
-        include=board
-        Multiple includes example: include=board,task
+        Multiple filters example: filter[name]=test&filter[task_id]=1
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -71,13 +71,13 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/columns
+    uri: api/comments
     metadata:
-      groupName: 'Column routes'
+      groupName: 'Comment routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column store'
+      title: 'Store a newly created resource in storage.'
       description: ''
       authenticated: true
       custom: []
@@ -90,31 +90,23 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      name:
-        name: name
+      body:
+        name: body
         description: ''
         required: true
         example: consequatur
         type: string
         custom: []
-      order:
-        name: order
-        description: ''
-        required: true
-        example: 17
-        type: integer
-        custom: []
-      board_id:
-        name: board_id
+      task_id:
+        name: task_id
         description: ''
         required: true
         example: 17
         type: integer
         custom: []
     cleanBodyParameters:
-      name: consequatur
-      order: 17
-      board_id: 17
+      body: consequatur
+      task_id: 17
     fileParameters: []
     responses: []
     responseFields: []
@@ -129,13 +121,13 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/columns/{id}'
+    uri: 'api/comments/{id}'
     metadata:
-      groupName: 'Column routes'
+      groupName: 'Comment routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column show'
+      title: 'Display the specified resource.'
       description: ''
       authenticated: true
       custom: []
@@ -146,27 +138,15 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the column.'
+        description: 'The ID of the comment.'
         required: true
         example: 1
         type: integer
         custom: []
     cleanUrlParameters:
       id: 1
-    queryParameters:
-      include:
-        name: include
-        description: 'Available includes: board, tasks'
-        required: false
-        example: |-
-          include=board
-          Multiple includes example: include=board,tasks
-        type: string
-        custom: []
-    cleanQueryParameters:
-      include: |-
-        include=board
-        Multiple includes example: include=board,tasks
+    queryParameters: []
+    cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -193,13 +173,13 @@ endpoints:
     httpMethods:
       - PUT
       - PATCH
-    uri: 'api/columns/{id}'
+    uri: 'api/comments/{id}'
     metadata:
-      groupName: 'Column routes'
+      groupName: 'Comment routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column update'
+      title: 'Update the specified resource in storage.'
       description: ''
       authenticated: true
       custom: []
@@ -210,7 +190,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the column.'
+        description: 'The ID of the comment.'
         required: true
         example: 1
         type: integer
@@ -220,31 +200,15 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      name:
-        name: name
+      body:
+        name: body
         description: ''
         required: false
         example: consequatur
         type: string
         custom: []
-      order:
-        name: order
-        description: ''
-        required: false
-        example: 17
-        type: integer
-        custom: []
-      board_id:
-        name: board_id
-        description: ''
-        required: false
-        example: 17
-        type: integer
-        custom: []
     cleanBodyParameters:
-      name: consequatur
-      order: 17
-      board_id: 17
+      body: consequatur
     fileParameters: []
     responses: []
     responseFields: []
@@ -259,13 +223,13 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/columns/{id}'
+    uri: 'api/comments/{id}'
     metadata:
-      groupName: 'Column routes'
+      groupName: 'Comment routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column delete'
+      title: 'Remove the specified resource from storage.'
       description: ''
       authenticated: true
       custom: []
@@ -276,7 +240,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the column.'
+        description: 'The ID of the comment.'
         required: true
         example: 1
         type: integer

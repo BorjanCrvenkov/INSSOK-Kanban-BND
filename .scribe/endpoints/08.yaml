@@ -1,17 +1,17 @@
-name: 'Column routes'
+name: 'Role routes'
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/columns
+    uri: api/roles
     metadata:
-      groupName: 'Column routes'
+      groupName: 'Role routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column index'
-      description: 'Default sort: order'
+      title: 'Role index'
+      description: 'Default sort: name'
       authenticated: true
       custom: []
     headers:
@@ -23,29 +23,23 @@ endpoints:
     queryParameters:
       "filter['filter_name']":
         name: "filter['filter_name']"
-        description: 'Available filters: name, border_id'
+        description: 'Available filters: name'
         required: false
-        example: |-
-          filter[name]=test.
-          Multiple filters example: filter[name]=test&filter[border_id]=1
+        example: 'filter[name]=test.'
         type: string
         custom: []
-      include:
-        name: include
-        description: 'Available includes: board, tasks'
+      sort:
+        name: sort
+        description: |-
+          Available sorts: name
+          Adding - before the sort name will sort in descending order.
         required: false
-        example: |-
-          include=board
-          Multiple includes example: include=board,task
+        example: sort=name
         type: string
         custom: []
     cleanQueryParameters:
-      "filter['filter_name']": |-
-        filter[name]=test.
-        Multiple filters example: filter[name]=test&filter[border_id]=1
-      include: |-
-        include=board
-        Multiple includes example: include=board,task
+      "filter['filter_name']": 'filter[name]=test.'
+      sort: sort=name
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -71,13 +65,13 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/columns
+    uri: api/roles
     metadata:
-      groupName: 'Column routes'
+      groupName: 'Role routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column store'
+      title: 'Role store'
       description: ''
       authenticated: true
       custom: []
@@ -97,24 +91,8 @@ endpoints:
         example: consequatur
         type: string
         custom: []
-      order:
-        name: order
-        description: ''
-        required: true
-        example: 17
-        type: integer
-        custom: []
-      board_id:
-        name: board_id
-        description: ''
-        required: true
-        example: 17
-        type: integer
-        custom: []
     cleanBodyParameters:
       name: consequatur
-      order: 17
-      board_id: 17
     fileParameters: []
     responses: []
     responseFields: []
@@ -129,13 +107,13 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/columns/{id}'
+    uri: 'api/roles/{id}'
     metadata:
-      groupName: 'Column routes'
+      groupName: 'Role routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column show'
+      title: 'Role show'
       description: ''
       authenticated: true
       custom: []
@@ -146,27 +124,15 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the column.'
+        description: 'The ID of the role.'
         required: true
         example: 1
         type: integer
         custom: []
     cleanUrlParameters:
       id: 1
-    queryParameters:
-      include:
-        name: include
-        description: 'Available includes: board, tasks'
-        required: false
-        example: |-
-          include=board
-          Multiple includes example: include=board,tasks
-        type: string
-        custom: []
-    cleanQueryParameters:
-      include: |-
-        include=board
-        Multiple includes example: include=board,tasks
+    queryParameters: []
+    cleanQueryParameters: []
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -193,13 +159,13 @@ endpoints:
     httpMethods:
       - PUT
       - PATCH
-    uri: 'api/columns/{id}'
+    uri: 'api/roles/{id}'
     metadata:
-      groupName: 'Column routes'
+      groupName: 'Role routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column update'
+      title: 'Role update'
       description: ''
       authenticated: true
       custom: []
@@ -210,7 +176,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the column.'
+        description: 'The ID of the role.'
         required: true
         example: 1
         type: integer
@@ -227,24 +193,8 @@ endpoints:
         example: consequatur
         type: string
         custom: []
-      order:
-        name: order
-        description: ''
-        required: false
-        example: 17
-        type: integer
-        custom: []
-      board_id:
-        name: board_id
-        description: ''
-        required: false
-        example: 17
-        type: integer
-        custom: []
     cleanBodyParameters:
       name: consequatur
-      order: 17
-      board_id: 17
     fileParameters: []
     responses: []
     responseFields: []
@@ -259,13 +209,13 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/columns/{id}'
+    uri: 'api/roles/{id}'
     metadata:
-      groupName: 'Column routes'
+      groupName: 'Role routes'
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Column delete'
+      title: 'Role delete'
       description: ''
       authenticated: true
       custom: []
@@ -276,7 +226,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the column.'
+        description: 'The ID of the role.'
         required: true
         example: 1
         type: integer

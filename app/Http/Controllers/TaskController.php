@@ -9,6 +9,10 @@ use App\Models\Task;
 use App\Services\TaskService;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Task routes
+ *
+ */
 class TaskController extends Controller
 {
     /**
@@ -23,7 +27,17 @@ class TaskController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Task index
+     *
+     * Default sort: order
+     *
+     * @queryParam filter['filter_name'] Available filters: title, description, priority, due_date, type, reporter_id, assignee_id
+     * Example: filter[title]=test.
+     * Multiple filters example: filter[title]=test&filter[priority]=low
+     *
+     * @queryParam include Available includes: column, assignee, reporter, users_followed_by, comments
+     * Example: include=column
+     * Multiple includes example: include=column,assignee
      *
      * @return JsonResponse
      * @authenticated
@@ -34,7 +48,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Task store
      *
      * @param StoreTaskRequest $request
      * @return JsonResponse
@@ -46,7 +60,11 @@ class TaskController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Task show
+     *
+     * @queryParam include Available includes: column, assignee, reporter, users_followed_by, comments
+     * Example: include=column
+     * Multiple includes example: include=column,assignee
      *
      * @param Task $task
      * @return JsonResponse
@@ -58,7 +76,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Task update
      *
      * @param UpdateTaskRequest $request
      * @param Task $task
@@ -71,7 +89,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Task delete
      *
      * @param Task $task
      * @return JsonResponse

@@ -9,6 +9,10 @@ use App\Models\Column;
 use App\Services\ColumnService;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Column routes
+ *
+ */
 class ColumnController extends Controller
 {
     /**
